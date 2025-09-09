@@ -1,0 +1,46 @@
+<div class="app-dashboart">
+  <div class="app-body">
+    <main class="main d-flex align-items-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 mx-auto">
+            <div class="card mx-4">
+              <div class="row justify-content-md-center">
+                <div class="col-md-auto">
+                  <img class="card-img-top" src="../../../assets/img/logo.png" alt="Logo">
+                </div>
+              </div>
+              <div class="card-body p-4">
+                <form>
+                  <h1>
+                    Confirmar Correo o Email
+                  </h1>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">&#64;</span>
+                    </div>
+                    <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Email o Correo"
+                    autocomplete="email" required
+                    id="correo"
+                    name="correo"
+                    [(ngModel)]="correo">
+                  </div>
+                  <button
+                  (click)="confirmar()"
+                  type="button"
+                  class="btn btn-block btn-success">
+                  Confirmar
+                </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+

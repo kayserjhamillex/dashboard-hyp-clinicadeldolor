@@ -1,0 +1,78 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h6 class="text-center">
+          Ticket de confirmacion
+        </h6>
+      </div>
+      <div class="card-body">
+        <div id="parapdf" class="col-12 shadow p-5 mb-2 bg-white rounded rounded-lg border border-light fondo">
+          <div  class="col-12 fondo p-4">
+            <section class="container">
+              <div class="row">
+                <article class="carta">
+                  <section class="date">
+                    <time datetime="23th feb">
+                      <h6>
+                        Codigo: {{ticket.id}}
+                      </h6>
+                      <span>
+                        Fecha: {{lafecha}}
+                      </span>
+                      Dia:  {{ticket.horario.Day + ' - ' + ticket.horario.hora.Turn}}  <br>  Cupo: {{ticket.horario.Cupo}}
+                      <br> Lapzo: {{ticket.horario.hora.Start + ' - ' + ticket.horario.hora.End}}
+                    </time>
+                  </section>
+                  <section class="carta-cont">
+                    <h1>
+                      Codigo: {{ticket.id}}
+                    </h1>
+                    <h3>
+                      Nombres y Apellidos:
+                      <!-- <br> -->
+                      {{ticket.cliente.Name + ' ' + ticket.cliente.LastName}}
+                    </h3>
+                    <h3>
+                      Tipo: {{ticket.Type}}
+                    </h3>
+                    <h3>
+                      {{ticket.Condition}}
+                    </h3>
+                    <div class="even-date">
+                      <time>
+                        <i class="fa fa-calendar"></i>
+                        <span>
+                          {{lafecha}}
+                        </span>
+                      </time>
+                    </div>
+                    <div class="even-info">
+                      <h4>
+                        Especialidad: {{ticket.horario.especialista.especialidad.Name}}
+                      </h4>
+                      <h5>
+                        Doctor: {{ticket.horario.especialista.doctor.Name + ' ' + ticket.horario.especialista.doctor.LastName}}
+                      </h5>
+                      <h6>
+                        Dia:  {{ticket.horario.Day + ' -- ' + ticket.horario.hora.Turn}}  ...  Cupo: {{ticket.horario.Cupo}}  ... Lapzo: {{ticket.horario.hora.Start + ' - ' + ticket.horario.hora.End}}
+                      </h6>
+                    </div>
+                    <br>
+                  </section>
+                </article>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button type="submit"
+        (click)="descargar()"
+          class="btn btn-primary btn-pill">
+          Generar PDF
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

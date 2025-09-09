@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-12 col-lg-8">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="text-center">
+          Horario Disponible
+        </h4>
+        <h6>
+          Total a Pagar:
+          <br>
+          s/. {{pago}}.00
+        </h6>
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                Desde
+              </th>
+              <th>
+                Hasta
+              </th>
+              <th>
+                ...
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let obj of horariofiltrado">
+              <td>
+                {{obj.hora.Start}}
+              </td>
+              <td>
+                {{obj.hora.End}}
+              </td>
+              <td>
+                <button *ngIf="check" (click)="reservar()" type="button" class="btn btn-pill btn-block btn-success">
+                  Confirmar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

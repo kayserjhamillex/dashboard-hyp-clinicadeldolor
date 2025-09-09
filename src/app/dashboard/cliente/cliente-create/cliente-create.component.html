@@ -1,0 +1,192 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Crear Paciente
+        </h4>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Nombres
+                </label>
+                <input name="cliente.Name"
+                [(ngModel)]="cliente.Name"
+                required minlength="3"
+                autofocus tabindex="1"
+                placeholder="........."
+                type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Apellidos
+                </label>
+                <input name="cliente.LastName"
+                [(ngModel)]="cliente.LastName"
+                required minlength="5" tabindex="2"
+                placeholder="........."
+                type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Direccion
+                </label>
+                <input name="cliente.Direction"
+                [(ngModel)]="cliente.Direction"
+                minlength="7" tabindex="3"
+                placeholder="........."
+                type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Profesion u Ocupacion
+                </label>
+                <input name="cliente.Job"
+                [(ngModel)]="cliente.Job"
+                minlength="5" tabindex="4"
+                placeholder="........."
+                type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Celular
+                </label>
+                <input name="cliente.Phone"
+                [(ngModel)]="cliente.Phone"
+                onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                required minlength="9" tabindex="5"
+                placeholder="........."
+                type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Fecha Nacimiento
+                </label>
+                <input type="date"
+                  class="form-control"
+                  [min]="stringmin"
+                  [max]="stringmax"
+                  required tabindex="6"
+                  name="cliente.BirthDate"
+                  [(ngModel)]="cliente.BirthDate"
+                  placeholder="a partir de 25 anios antes">
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Correo
+                </label>
+                <input name="cliente.Email"
+                [(ngModel)]="cliente.Email"
+                pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*"
+                minlength="5" tabindex="7"
+                placeholder="........."
+                type="email" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Num. Documento
+                </label>
+                <input name="cliente.DocumentNumber"
+                [(ngModel)]="cliente.DocumentNumber"
+                onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                required minlength="8" tabindex="8"
+                placeholder="........."
+                type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Genero
+                </label>
+                <br>
+                <select (change)='onOptionsSelected($event)'
+                  id="select-type-basic"
+                  class="form-control"
+                  [(ngModel)]="cliente.Gender"
+                  name="cliente.Gender"
+                  required tabindex="9">
+                  <option value=""  selected>
+                    Seleccione su Genero
+                  </option>
+                  <option [value]="obj.name" *ngFor="let obj of genero">
+                  {{obj.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Estado Civil
+                </label>
+                <br>
+                <select (change)='onOptionsSelectedStatus($event)'
+                  id="select-type-basic" class="form-control"
+                  [(ngModel)]="cliente.CivilStatus"
+                  name="cliente.CivilStatus"
+                  required tabindex="10">
+                  <option value="" selected>
+                    Seleccione su Estado Civil
+                  </option>
+                  <option [value]="obj.name" *ngFor="let obj of estadocivil">
+                  {{obj.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label>
+                  Foto
+                </label>
+                <br>
+                <button (click)="changeImg()"
+                type="button" class="btn btn-primary">
+                  <input type="file"
+                    name="avatar"
+                    #file1 required tabindex="11"
+                    (change)="changeImagen()"
+                    accept=".png,.jpg,.jpeg">
+                    Subir Imagen
+                </button>
+                <br>
+                <input name="cliente.Photo"
+                [(ngModel)]="cliente.Photo"
+                type="text" class="form-control text-primary" readonly required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <img class="rounded-circle img-fluid" [src]="cliente.Photo">
+            </div>
+          </div>
+          <button (click)="saveCliente()" type="submit" class="btn btn-primary pull-right"
+            [disabled]="(cliente.Name === '' ||  cliente.LastName === '' ||  cliente.Phone === '' ||  cliente.Gender === '' ||  cliente.CivilStatus === '' ||  cliente.DocumentNumber === '')? true:false">
+            Crear
+          </button>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,265 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Crear Testimonio
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div *ngIf="botones" class="col-12 col-lg-6 p-1">
+            <div class="row">
+              <div class="col-12 col-lg-6">
+                <button (click)="crearcliente()"
+                type="button" class="btn btn-primary">
+                  Crear
+                </button>
+              </div>
+              <div class="col-12 col-lg-6">
+                <button (click)="buscarcliente()"
+                type="button" class="btn btn-primary">
+                  Buscar
+                </button>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="buscar" class="col-12 col-lg-6 p-1">
+            <form>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Correo o Documento
+                    </label>
+                    <input name="dato"
+                    [(ngModel)]="dato"
+                    type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-lg-6">
+                  <button (click)="searchEmailCliente()"
+                  type="button" class="btn btn-primary"
+                  [disabled]="(dato === '')? true:false">
+                    Por Correo
+                  </button>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <button (click)="searchDocCliente()"
+                  type="button" class="btn btn-primary"
+                  [disabled]="(dato === '')? true:false">
+                    Por Documento
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div *ngIf="crear" class="col-12 col-lg-6 p-1">
+            <form>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Nombres
+                    </label>
+                    <input name="cliente.Name"
+                    [(ngModel)]="cliente.Name"
+                    required minlength="3"
+                    autofocus tabindex="1"
+                    placeholder="........."
+                    type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Apellidos
+                    </label>
+                    <input name="cliente.LastName"
+                    [(ngModel)]="cliente.LastName"
+                    required minlength="5" tabindex="2"
+                    placeholder="........."
+                    type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Direccion
+                    </label>
+                    <input name="cliente.Direction"
+                    [(ngModel)]="cliente.Direction"
+                    required minlength="7" tabindex="3"
+                    placeholder="........."
+                    type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Profesion u Ocupacion
+                    </label>
+                    <input name="cliente.Job"
+                    [(ngModel)]="cliente.Job"
+                    required minlength="5" tabindex="4"
+                    placeholder="........."
+                    type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Celular
+                    </label>
+                    <input name="cliente.Phone"
+                    [(ngModel)]="cliente.Phone"
+                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                    required minlength="9" tabindex="5"
+                    placeholder="........."
+                    type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Fecha Nacimiento
+                    </label>
+                    <input type="date"
+                      class="form-control"
+                      max="<?= date('Y-m-d'); ?>"
+                      required tabindex="6"
+                      name="cliente.BirthDate"
+                      [(ngModel)]="cliente.BirthDate"
+                      placeholder="a partir de 25 anios antes">
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Correo
+                    </label>
+                    <input name="cliente.Email"
+                    [(ngModel)]="cliente.Email"
+                    pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*"
+                    required minlength="5" tabindex="7"
+                    placeholder="........."
+                    type="email" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Num. Documento
+                    </label>
+                    <input name="cliente.DocumentNumber"
+                    [(ngModel)]="cliente.DocumentNumber"
+                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                    required minlength="8" tabindex="8"
+                    placeholder="........."
+                    type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Genero
+                    </label>
+                    <br>
+                    <select (change)='onOptionsSelected($event)'
+                      id="select-type-basic"
+                      class="form-control"
+                      [(ngModel)]="cliente.Gender"
+                      name="cliente.Gender"
+                      required tabindex="9">
+                      <option selected>
+                        Seleccione su Genero
+                      </option>
+                      <option [value]="obj.name" *ngFor="let obj of genero">
+                      {{obj.name}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Estado Civil
+                    </label>
+                    <br>
+                    <select (change)='onOptionsSelectedStatus($event)'
+                      id="select-type-basic" class="form-control"
+                      [(ngModel)]="cliente.CivilStatus"
+                      name="cliente.CivilStatus"
+                      required tabindex="10">
+                      <option selected>
+                        Seleccione su Estado Civil
+                      </option>
+                      <option [value]="obj.name" *ngFor="let obj of estadocivil">
+                      {{obj.name}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <button (click)="saveCliente()" type="submit" class="btn btn-primary pull-right"
+                [disabled]="(cliente.Name === '' ||  cliente.LastName === '' ||  cliente.Direction === '' ||  cliente.Job === '' ||  cliente.Phone === '' ||  cliente.Gender === '' ||  cliente.CivilStatus === '' ||  cliente.DocumentNumber === '' ||  cliente.Email === '')? true:false">
+                Crear
+              </button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+          <div *ngIf="datoscliente" class="col-12 col-lg-6 p-1">
+            <div class="card mb-3 carta">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img  *ngIf="cliente1.Photo !== 'imagen'"
+                    [src]="cliente1.Photo"
+                    class="img-fluid rounded-start" alt="...">
+                  <img *ngIf="cliente1.Photo === 'imagen'"
+                    src="../../../../assets/img/faces/clem-onojeghuo-2.jpg"
+                    class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      {{cliente1.Name + ' ' + cliente1.LastName}}
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6 p-1">
+            <form>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Testimonio
+                    </label>
+                    <textarea
+                      name="testimonio.Testimony"
+                      [(ngModel)]="testimonio.Testimony"
+                      class="form-control"
+                      cols="30" rows="10"
+                      required minlength="20"
+                      tabindex="11"
+                      placeholder="........."></textarea>
+                  </div>
+                </div>
+              </div>
+              <button (click)="createTestimonio()" type="submit"
+                class="btn btn-primary pull-right"
+                [disabled]="(testimonio.Testimony === '')? true:false">
+                Crear
+              </button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

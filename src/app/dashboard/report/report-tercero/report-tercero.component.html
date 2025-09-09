@@ -1,0 +1,143 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title text-center">
+          Flujo de caja entre fechas
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="row p-4">
+          <div class="col-12 p-2">
+            <form>
+              <div class="row">
+                <div class="col-12 col-md-4 p-2">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Fecha Inicio
+                    </label>
+                    <br>
+                    <input type="date"
+                      class="form-control"
+                      id="fecha" name="fecha"
+                      min="2022-02-02" [max]="stringmaxstart"
+                      [(ngModel)]="fechastart" required
+                      autofocus tabindex="1">
+                    <div class="valid-feedback">
+                      Campo rellenado.
+                    </div>
+                    <div class="invalid-feedback">
+                      Por favor rellene el campo.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-4 p-2">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Fecha Fin
+                    </label>
+                    <br>
+                    <input type="date"
+                      class="form-control"
+                      id="fecha" name="fecha"
+                      min="2022-02-02" [max]="stringmaxend"
+                      [(ngModel)]="fechaend" required tabindex="2">
+                    <div class="valid-feedback">
+                      Campo rellenado.
+                    </div>
+                    <div class="invalid-feedback">
+                      Por favor rellene el campo.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-4 p-2">
+                  <button (click)="generar()" type="button" class="btn btn-primary btn-block">
+                    Generar Reporte
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div *ngIf="!reportetablas" class="col-12 p-2">
+            <h2>
+              Reporte
+            </h2>
+          </div>
+          <div *ngIf="reportetablas" class="col-12 p-2">
+            <button (click)="descargar()" type="button" class="btn btn-primary btn-block">
+              Generar PDF
+            </button>
+            <br>
+            <br>
+            <div class="row" id="parapdf">
+              <div class="col-12 p-1">
+                <div class="row">
+                  <div class="col-12 col-md-3 col-lg-2 p-2">
+                    <img src="../../../../assets/img/logo.png" class="img-responsive w-50" alt="Logo Empresa">
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-7 p-2">
+                    <h4 class="text-center">
+                      Flujo de caja
+                    </h4>
+                  </div>
+                  <div class="col-12 col-md-3 p-2">
+                    Rango de Fechas:
+                    <br>
+                    {{fechastartstring + ' - ' + fechaendstring}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 p-1">
+                <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title text-center">
+                      Datos
+                    </h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead class=" text-primary">
+                          <th>
+                            Doctor
+                          </th>
+                          <th>
+                            Monto
+                          </th>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of reporte">
+                            <td>
+                              {{item.doctor}}
+                            </td>
+                            <td>
+                              {{item.monto}}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 p-2">
+                <h2 *ngIf="!grafico">
+                  Grafico
+                </h2>
+                <div id="chart">
+                  <apx-chart
+                    [series]="chartOptions.series"
+                    [chart]="chartOptions.chart"
+                    [labels]="chartOptions.labels"
+                    [responsive]="chartOptions.responsive"
+                  ></apx-chart>
+                </div>
+              </div>
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

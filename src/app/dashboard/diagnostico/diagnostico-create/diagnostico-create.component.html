@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Crear Diagnostico
+        </h4>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Nombre
+                </label>
+                <input name="diagnostico.Name"
+                  [(ngModel)]="diagnostico.Name"
+                  type="text" class="form-control"
+                  required minlength="3"
+                  autofocus tabindex="1"
+                  placeholder=".........">
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Detalle
+                </label>
+                <textarea name="diagnostico.Detail"
+                  [(ngModel)]="diagnostico.Detail"
+                  class="form-control"
+                  required minlength="20"
+                  tabindex="2"
+                  placeholder="........."
+                  cols="30" rows="10"></textarea>
+              </div>
+            </div>
+          </div>
+          <button (click)="saveDiagnostico()" type="submit" class="btn btn-primary pull-right"
+          [disabled]="(diagnostico.Name === '' ||  diagnostico.Detail === '')? true:false">
+            Crear
+          </button>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+body app-root app-dashboard app-header .d-md-block {
+  display: none;
+}
+@media (min-width: 768px)
+{
+  body app-root app-dashboard app-header .d-md-block
+  {
+    display: none;
+  }
+}
+::-webkit-scrollbar {
+  display: none;
+}

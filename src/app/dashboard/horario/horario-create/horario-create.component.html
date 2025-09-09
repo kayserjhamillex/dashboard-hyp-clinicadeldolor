@@ -1,0 +1,197 @@
+<!-- <div class="animated fadeIn"> -->
+  <div class="row">
+    <div class="col-12 col-lg-6">
+      <div class="card" *ngIf="bandera === 'proceso1'">
+        <div class="card-header card-header-primary">
+          <h4 class="text-center">
+            Elegir Intervalo y Turno
+          </h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6 p-1">
+              <button (click)="selectturno('mañana')" type="button" class="btn btn-pill btn-block btn-info">
+                Turno Mañana
+              </button>
+            </div>
+            <div class="col-6 p-1">
+              <button (click)="selectturno('tarde')" type="button" class="btn btn-pill btn-block btn-info">
+                Turno Tarde
+              </button>
+            </div>
+          </div>
+          <br>
+          <br>
+          <div class="row">
+            <div class="col-4 p-1">
+              <button (click)="intervalo(0)" type="button" class="btn btn-pill btn-block btn-info">
+                15 min
+              </button>
+            </div>
+            <div class="col-4 p-1">
+              <button (click)="intervalo(1)" type="button" class="btn btn-pill btn-block btn-info">
+                20 min
+              </button>
+            </div>
+            <div class="col-4 p-1">
+              <button (click)="intervalo(2)" type="button" class="btn btn-pill btn-block btn-info">
+                30 min
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card" *ngIf="bandera === 'proceso2'">
+        <div class="card-header card-header-primary">
+          <h4 class="text-center">
+            Elegir Inicio y Fin
+          </h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 col-lg-6 p-1">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="text-center">
+                    Inicio
+                  </h4>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div *ngFor="let obj of horas"
+                      class="col-6 col-md-4 col-lg-3 p-1">
+                      <button (click)="inicio(obj.id)" type="button"
+                        class="btn btn-pill btn-block btn-info">
+                        {{obj.Start}}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 p-1">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="text-center">
+                    Fin
+                  </h4>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div *ngFor="let obj of horas"
+                      class="col-6 col-md-4 col-lg-3 p-1">
+                      <button (click)="final(obj.id)" type="button"
+                        class="btn btn-pill btn-block btn-info"
+                        [disabled]="(data.inicio === 0)? true:false">
+                        {{obj.End}}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card" *ngIf="bandera === 'proceso3'">
+        <div class="card-header card-header-primary">
+          <h4 class="text-center">
+            Elegir Especialista
+          </h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>
+                    Doctor
+                  </th>
+                  <th>
+                    Especialidad
+                  </th>
+                  <th>
+                    ...
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let obj of especialistas">
+                  <td>
+                    {{obj.doctor.Name + ' ' + obj.doctor.LastName}}
+                  </td>
+                  <td>
+                    {{obj.especialidad.Name}}
+                  </td>
+                  <td>
+                    <button (click)="elejir(obj.id)" type="button" class="btn btn-pill btn-block btn-success">
+                      Elejir
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="card" *ngIf="bandera === 'proceso4'">
+        <div class="card-header card-header-primary">
+          <h4 class="text-center">
+            Dia Elegido
+          </h4>
+        </div>
+        <div class="card-body">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-6 col-md-4 col-lg-3 wasa p-1" *ngFor="let obj of dias">
+                <button (click)="diaelegido(obj.name)" type="button" class="btn btn-pill btn-block btn-info">
+                  {{obj.name}}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="text-center">
+            Vista Previa del horario generado
+          </h4>
+        </div>
+        <div class="card-body">
+          <div *ngIf="mostrartabla" class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Dia</th>
+                  <th>Field</th>
+                  <th>Hora</th>
+                  <th>  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let obj of previo">
+                  <td>{{obj.Dia}}</td>
+                  <td>{{obj.FieldId}}</td>
+                  <td>{{obj.HoraId}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-12 p-1">
+            <button *ngIf="mostrartabla" (click)="limpiar()" type="button" class="btn btn-pill btn-block btn-success">
+              Limpiar
+            </button>
+          </div>
+          <div class="col-12 p-1">
+            <button (click)="finish()" type="button" class="btn btn-pill btn-block btn-success">
+              Finalizar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- </div> -->

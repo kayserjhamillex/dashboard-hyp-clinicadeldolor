@@ -1,0 +1,266 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Agregar Especialidad al Doctor
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 col-lg-6 p-3">
+            <div class="card">
+              <div class="card-header card-header-primary">
+                <h4 class="card-title">
+                  Doctor
+                </h4>
+              </div>
+              <div class="card-body">
+                <div class="row p-4">
+                  <div class="col-12 col-md-4 p-1">
+                    <img [src]="doctor.Photo" id="foto" alt="foto doctor">
+                  </div>
+                  <div class="col-12 col-md-8 p-1">
+                    <div class="row">
+                      <div class="col-12 p-1 text-center">
+                        Nombres y Apellidos:
+                        <br>
+                        {{doctor.Name + ' ' + doctor.LastName}}
+                      </div>
+                      <div class="col-12 col-lg-6 p-1 text-center">
+                        Colegiatura:
+                        {{doctor.MedicalSchoolNumber}}
+                      </div>
+                      <div class="col-12 col-lg-6 p-1 text-center">
+                        Correo:
+                        {{doctor.Email}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6 p-3">
+            <div class="row">
+              <div *ngIf="resultadoespecialidad" class="col-12 p-1">
+                <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title">
+                      Especialidad
+                    </h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="row p-4">
+                      <div class="col-12 col-md-4 p-1">
+                        <img [src]="especialidad1.Image" class="w-100" alt="foto doctor">
+                      </div>
+                      <div class="col-12 col-md-8 p-1">
+                        <div class="row">
+                          <div class="col-12 col-lg-6 p-1 text-center">
+                            Nombre:
+                            <br>
+                            {{especialidad1.Name}}
+                          </div>
+                          <div class="col-12 col-lg-6 p-1 text-center">
+                            Precio:
+                            {{especialidad1.Price}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="especialidadbuscar" class="col-12 p-1">
+                <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title">
+                      Especialidad
+                    </h4>
+                  </div>
+                  <div class="card-body">
+                    <form>
+                      <div class="row">
+                        <div class="col-12 p-4">
+                          <div class="form-group">
+                            <label class="bmd-label-floating" for="codigodoctor">
+                              Especialidad
+                            </label>
+                            <select
+                              (change)='onOptionsSelectedEspecialidad($event)'
+                              id="select-type-basic"
+                              [(ngModel)]="codigoespecialidad"
+                              name="codigoespecialidad"
+                              class="form-control"
+                              required>
+                              <option selected>
+                                Seleccione Especialidad
+                              </option>
+                              <option [value]="obj.id" *ngFor="let obj of especialidades">
+                              {{obj.Name}}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <button (click)="crear2()"
+                        type="submit" class="btn btn-primary pull-right">
+                        Crear
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="especialidadcreate" class="col-12 p-1">
+                <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title">
+                      Crear Especialidad
+                    </h4>
+                  </div>
+                  <div class="card-body">
+                    <form>
+                      <div class="row p-4">
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">
+                              Nombre
+                            </label>
+                            <input name="especialidad.Name"
+                              [(ngModel)]="especialidad.Name"
+                              type="text" class="form-control"
+                              required minlength="5"
+                              autofocus tabindex="1"
+                              placeholder=".........">
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">
+                              Precio
+                            </label>
+                              <input name="especialidad.Price"
+                              [(ngModel)]="especialidad.Price"
+                              type="text" class="form-control"
+                              required minlength="2"
+                              tabindex="2" placeholder=".........">
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">
+                              Resumen
+                            </label>
+                            <textarea name="especialidad.Resume"
+                              [(ngModel)]="especialidad.Resume"
+                              class="form-control"
+                              cols="30" rows="10"
+                              required minlength="20"
+                              tabindex="3"
+                              placeholder="........."></textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-8">
+                          <div class="form-group">
+                            <label>
+                              Imagen
+                            </label>
+                            <br>
+                            <button (click)="changeImg2()" type="button" class="btn btn-primary">
+                              <input type="file"
+                                  name="avatar"
+                                  #file2
+                                  (change)="changeImagen2()"
+                                  accept=".png,.jpg,.jpeg">
+                                  Subir Imagen
+                            </button>
+                            <br>
+                            <input name="especialidad.Image"
+                            [(ngModel)]="especialidad.Image"
+                            type="text" class="form-control"
+                            readonly>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <img id="imagen" class="w-100" [src]="especialidad.Image">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-8">
+                          <div class="form-group">
+                            <label>
+                              Icono
+                            </label>
+                            <br>
+                            <button (click)="changeIco()" type="button" class="btn btn-primary">
+                              <input type="file"
+                                  name="avatar"
+                                  #file3
+                                  (change)="changeIcono()"
+                                  accept=".png,.jpg,.jpeg">fg
+                                  Subir Icono
+                            </button>
+                            <br>
+                            <input name="especialidad.Icon"
+                            [(ngModel)]="especialidad.Icon"
+                            type="text" class="form-control"
+                            readonly>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <img id="imagen" class="w-100" [src]="especialidad.Icon">
+                        </div>
+                      </div>
+                      <button (click)="saveEspecialidad()" type="submit" class="btn btn-primary pull-right"
+                        [disabled]="(especialidad.Name === '' ||  especialidad.Resume === '' ||  especialidad.Price === 0)? true:false">
+                        Crear
+                      </button>
+                      <div class="clearfix"></div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 p-1">
+            <form>
+              <div class="row">
+                <div class="col-12 col-md-9 col-lg-8">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Turno
+                    </label>
+                    <input name="especialista.Turn"
+                      [(ngModel)]="especialista.Turn"
+                      type="text" class="form-control"
+                      required minlength="3"
+                      tabindex="1" placeholder=".........">
+                  </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-4">
+                  <button (click)="saveEspecialista()" type="submit" class="btn btn-primary"
+                    [disabled]="(codigodoctor === 0 || codigoespecialidad === 0 ||  especialista.Turn === '')? true:false">
+                    Asignar Nueva Especialidad
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-lg-3 col-md-6 p-1">
+            <button (click)="finish()"
+              type="submit" class="btn btn-primary btn-block">
+              Finalizar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

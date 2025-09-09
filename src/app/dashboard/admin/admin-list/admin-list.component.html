@@ -1,0 +1,167 @@
+<div class="row">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-12 col-lg-6">
+        <button (click)="crear()" type="button" class="btn btn-primary">
+          Crear
+        </button>
+      </div>
+      <div *ngIf="listafiltrada" class="col-12 col-lg-6">
+        <button (click)="verdesabilitados()" type="button" class="btn btn-primary">
+          Lista Desabilitada
+        </button>
+      </div>
+      <div *ngIf="!listafiltrada" class="col-12 col-lg-6">
+        <button (click)="verdesabilitados()" type="button" class="btn btn-primary">
+          Lista Normal
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Lista de Usuarios
+        </h4>
+      </div>
+      <div class="card-body">
+        <div *ngIf="listafiltrada" class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Nombres y Apellidos
+              </th>
+              <th>
+                Correo
+              </th>
+              <th>
+                Celular
+              </th>
+              <th>
+                Rol
+              </th>
+              <th>
+                Imagen
+              </th>
+              <th>
+                ...
+              </th>
+              <th>
+                ...
+              </th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of adminshabilitados" >
+                <td *ngIf="item.id !== 1">
+                  {{item.Name + ' '  + item.LastName}}
+                </td>
+                <td *ngIf="item.id !== 1">
+                  {{item.Email}}
+                </td>
+                <td *ngIf="item.id !== 1">
+                  {{item.Phone}}
+                </td>
+                <td *ngIf="item.id !== 1">
+                  {{item.Condition}}
+                </td>
+                <td *ngIf="item.id !== 1">
+                  <img *ngIf="item.Photo !== 'imagen'"
+                    class="rounded-circle"
+                    [src]="item.Photo" alt="foto">
+                  <img *ngIf="item.Photo === 'imagen' || item.Photo === ''"
+                    class="rounded-circle"
+                    src="../../../../assets/img/faces/avatar.jpg"
+                    alt="foto">
+                </td>
+                <td *ngIf="item.id !== 1" class="text-primary">
+                  <button (click)="editar(item.id)" type="button" class="btn btn-primary">
+                    <span class="material-icons">
+                      edit
+                      </span>
+                  </button>
+                </td>
+                <td *ngIf="item.id !== 1" class="text-primary">
+                  <button *ngIf="item.Condition !== 'admin'" (click)="deshabilitar(item.id)"
+                    type="button" class="btn btn-warning">
+                    <span class="material-icons">
+                      lock
+                    </span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="!listafiltrada" class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Nombres y Apellidos
+              </th>
+              <th>
+                Correo
+              </th>
+              <th>
+                Celular
+              </th>
+              <th>
+                Rol
+              </th>
+              <th>
+                Imagen
+              </th>
+              <th>
+                ...
+              </th>
+              <th>
+                ...
+              </th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of adminsdeshabilitados" >
+                <td *ngIf="item.id !== 1">
+                  {{item.Name + ' '  + item.LastName}}
+                </td>
+                <td *ngIf="item.id !== 1">
+                  {{item.Email}}
+                </td>
+                <td *ngIf="item.id !== 1">
+                  {{item.Phone}}
+                </td>
+                <td *ngIf="item.id !== 1">
+                  {{item.Condition}}
+                </td>
+                <td *ngIf="item.id !== 1">
+                  <img *ngIf="item.Photo !== 'imagen'"
+                    class="rounded-circle"
+                    [src]="item.Photo" alt="foto">
+                  <img *ngIf="item.Photo === 'imagen'"
+                    class="rounded-circle"
+                    src="../../../../assets/img/faces/avatar.jpg"
+                    alt="foto">
+                </td>
+                <td *ngIf="item.id !== 1" class="text-primary">
+                  <button (click)="editar(item.id)" type="button" class="btn btn-primary">
+                    <span class="material-icons">
+                      edit
+                      </span>
+                  </button>
+                </td>
+                <td *ngIf="item.id !== 1" class="text-primary">
+                  <button *ngIf="item.Condition !== 'admin'"
+                    (click)="habilitar(item.id)"
+                    type="button" class="btn btn-warning">
+                    <span class="material-icons">
+                      lock_open
+                    </span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

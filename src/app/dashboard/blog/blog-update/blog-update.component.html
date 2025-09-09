@@ -1,0 +1,264 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Actualizar Blog y Parrafos
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 p-1">
+            <form>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Titulo
+                    </label>
+                    <input name="blog.Title"
+                      [(ngModel)]="blog.Title"
+                      type="text" class="form-control"
+                      required minlength="3"
+                      autofocus tabindex="1"
+                      placeholder=".........">
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Resumen
+                    </label>
+                    <textarea
+                      name="blog.Resume"
+                      [(ngModel)]="blog.Resume"
+                      class="form-control"
+                      required minlength="20"
+                      tabindex="2"
+                      placeholder="........."
+                      cols="30" rows="10"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label>
+                      Imagen
+                    </label>
+                    <br>
+                    <button (click)="changeImagen()"
+                    type="button" class="btn btn-primary">
+                      <input type="file"
+                          name="avatar"
+                          #file1
+                          (change)="changeImage()"
+                          accept=".png,.jpg,.jpeg">
+                          Subir Imagen
+                    </button>
+                    <br>
+                    <input name="blog.Image"
+                    [(ngModel)]="blog.Image"
+                    type="text" class="form-control" readonly>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <img class="rounded-circle" [src]="blog.Image">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label>
+                      Imagen 2
+                    </label>
+                    <br>
+                    <button (click)="changeMedia()"
+                    type="button" class="btn btn-primary">
+                      <input type="file"
+                          name="avatar"
+                          #file2
+                          (change)="changeVideo()"
+                          accept=".png,.jpg,.jpeg">
+                          Subir Imagen 2
+                    </button>
+                    <br>
+                    <input name="blog.Video"
+                    [(ngModel)]="blog.Video"
+                    type="text" class="form-control" readonly>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <img class="rounded-circle" [src]="blog.Video">
+                </div>
+              </div>
+              <button (click)="updateBlog()" type="submit" class="btn btn-primary pull-right"
+                [disabled]="(blog.Title === '' ||  blog.Resume === '' ||  blog.Image === '')? true:false">
+                Actualizar
+              </button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+          <div class="col-12 p-1">
+            <div class="row">
+              <div class="col-12 col-lg-6 p-1">
+                <form>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">
+                          Subtitulo
+                        </label>
+                        <input name="elparrafo.Subtitle"
+                          [(ngModel)]="elparrafo.Subtitle"
+                          type="text" class="form-control"
+                          required minlength="3"
+                          autofocus tabindex="3"
+                          placeholder=".........">
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">
+                          Parrafo
+                        </label>
+                        <textarea
+                          name="elparrafo.Paragraph"
+                          [(ngModel)]="elparrafo.Paragraph"
+                          class="form-control"
+                          required minlength="10" tabindex="4"
+                          placeholder="........."
+                          cols="30" rows="10"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-8">
+                      <div class="form-group">
+                        <label>
+                          Imagen
+                        </label>
+                        <br>
+                        <button (click)="changeImagen()"
+                        type="button" class="btn btn-primary">
+                          <input type="file"
+                              name="avatar"
+                              #file1
+                              (change)="changeImage()"
+                              accept=".png,.jpg,.jpeg">
+                              Subir Imagen
+                        </button>
+                        <br>
+                        <input name="elparrafo.Image"
+                        [(ngModel)]="elparrafo.Image"
+                        type="text" class="form-control" readonly>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <img class="rounded-circle" [src]="elparrafo.Image">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-8">
+                      <div class="form-group">
+                        <label>
+                          Video
+                        </label>
+                        <br>
+                        <button (click)="changeMedia()"
+                        type="button" class="btn btn-primary">
+                          <input type="file"
+                              name="avatar"
+                              #file2
+                              (change)="changeVideo()"
+                              accept=".png,.jpg,.jpeg">
+                              Subir Imagen 2
+                        </button>
+                        <br>
+                        <input name="elparrafo.Video"
+                        [(ngModel)]="elparrafo.Video"
+                        type="text" class="form-control" readonly>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <img class="rounded-circle" [src]="elparrafo.Video">
+                    </div>
+                  </div>
+                  <button (click)="updateparrafo(elparrafo.id, elparrafo.Paragraph)" type="submit" class="btn btn-primary pull-right"
+                    [disabled]="(elparrafo.Subtitle === '' &&  elparrafo.Paragraph === '' &&  elparrafo.Image === '' &&  elparrafo.Video === '')? true:false">
+                    Actualizar
+                  </button>
+                  <div class="clearfix"></div>
+                </form>
+              </div>
+              <div class="col-12 col-lg-6 p-1">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class=" text-primary">
+                      <th>
+                        Subtitulo
+                      </th>
+                      <th>
+                        Parrafo
+                      </th>
+                      <th>
+                        Image
+                      </th>
+                      <th>
+                        Video
+                      </th>
+                      <th>
+                        ...
+                      </th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of parrafos">
+                        <td>
+                          {{item.Subtitle}}
+                        </td>
+                        <td>
+                          {{item.Paragraph}}
+                        </td>
+                        <td>
+                          {{item.Image}}
+                        </td>
+                        <td>
+                          {{item.Video}}
+                        </td>
+                        <td class="text-primary">
+                          <button (click)="elegir(item.id)"
+                          type="button" class="btn btn-info">
+                            <span class="material-icons">
+                              edit
+                            </span>
+                          </button>
+                        </td>
+                        <td class="text-primary">
+                          <button (click)="delete(item)"
+                          type="button" class="btn btn-info">
+                            <span class="material-icons">
+                              delete
+                            </span>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 p-1">
+            <button (click)="finish()"
+            type="button" class="btn btn-info">
+              <span class="material-icons">
+                check
+              </span>
+              Finalizar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Crear Servicio
+        </h4>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Nombre
+                </label>
+                <input name="servicio.Name"
+                [(ngModel)]="servicio.Name"
+                type="text" class="form-control"
+                required minlength="5"
+                autofocus tabindex="1"
+                placeholder=".........">
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Resumen
+                </label>
+                <textarea name="servicio.Resume"
+                [(ngModel)]="servicio.Resume"
+                class="form-control"
+                required minlength="20"
+                tabindex="2" cols="30" rows="10"
+                placeholder="........."></textarea>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Precio
+                </label>
+                <input name="servicio.Price"
+                [(ngModel)]="servicio.Price"
+                type="text" class="form-control"
+                required minlength="2"
+                tabindex="3" placeholder=".........">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label>
+                  Imagen
+                </label>
+                <br>
+                <button (click)="changeImg()" type="button" class="btn btn-primary">
+                  <input type="file"
+                      name="avatar"
+                      #file1 required
+                      (change)="changeImagen()"
+                      accept=".png,.jpg,.jpeg">
+                      Subir Imagen
+                </button>
+                <br>
+                <input name="servicio.Image"
+                [(ngModel)]="servicio.Image"
+                type="text" class="form-control"
+                readonly>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <img class="rounded-circle" [src]="servicio.Image">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label>
+                  Icono
+                </label>
+                <br>
+                <button (click)="changeIco()" type="button" class="btn btn-primary">
+                  <input type="file"
+                      name="avatar"
+                      #file1
+                      (change)="changeIcono()"
+                      accept=".png,.jpg,.jpeg">
+                      Subir Icono
+                </button>
+                <br>
+                <input name="servicio.Icon"
+                [(ngModel)]="servicio.Icon"
+                type="text" class="form-control"
+                readonly>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <img class="rounded-circle" [src]="servicio.Icon">
+            </div>
+          </div>
+          <button (click)="saveServicio()" type="submit" class="btn btn-primary pull-right"
+            [disabled]="(servicio.Name === '' ||  servicio.Resume === '' ||  servicio.Price === 0 ||  servicio.Image === '' ||  servicio.Icon === '')? true:false">
+            Crear
+          </button>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,120 @@
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="text-center">
+          Paciente
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12" *ngIf="buscar">
+            <form id="formSearchCliente" class="was-validated" name="formSearchCliente">
+              <div class="form-group">
+                <label class="form-col-form-label" for="dato">
+                    Poner el numero de DNI
+                </label>
+                <input type="text" class="form-control" id="dato" name="dato" [(ngModel)]="dato" required>
+                <div class="valid-feedback">
+                  Campo rellenado.
+                </div>
+                <div class="invalid-feedback">
+                  Por favor rellene el campo.
+                </div>
+              </div>
+              <div class="col-12">
+                <button type="submit"  (click)="searchDocCliente()"
+                    class="btn btn-success btn-lg btn-block btn-pill"
+                    [disabled]="(dato === '')? true:false">
+                    <span class="material-icons">
+                      search
+                    </span>
+                    DNI
+                  </button>
+              </div>
+              <br>
+            </form>
+          </div>
+          <div class="col-12" *ngIf="datoscliente">
+            <div>
+              <h4 class="text-center">
+                Datos:
+              </h4>
+            </div>
+            <div class="text-center">
+              <h3>
+                Apellidos y Nombres:
+              </h3>
+              <h3>
+                {{cliente1.Name + " " + cliente1.LastName}}
+              </h3>
+              <h3>
+                Correo:
+              </h3>
+              <h3>
+                {{cliente1.Email}}
+              </h3>
+            </div>
+          </div>
+          <div class="col-12" *ngIf="datoscliente">
+            <button (click)="buscarcliente()" type="button" class="btn btn-info btn-block">
+              <span class="material-icons">
+                search
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="text-center">
+          Citas con resultado de laboratorio
+        </h4>
+      </div>
+      <div class="card-body">
+        <div *ngIf="!datoscliente" class="col-12 p-1">
+          <h1 class="text-center">
+            Aun no hay paciente encontrado
+          </h1>
+        </div>
+        <div *ngIf="datoscliente" class="col-12 p-1">
+          <div  class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Fecha Cita
+                </th>
+                <th>
+                  Estado
+                </th>
+                <th>
+                  ...
+                </th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of reservas">
+                  <td>
+                    {{item.Appointment}}
+                  </td>
+                  <td>
+                    {{item.Condition + ' -- ' + item.Labstatus}}
+                  </td>
+                  <td class="text-primary">
+                    <button (click)="resultadosanalisis(item.id)" type="button" class="btn btn-info">
+                      <span class="material-icons">
+                        visibility
+                      </span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

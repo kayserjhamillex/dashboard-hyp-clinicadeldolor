@@ -1,0 +1,345 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Actualizar Especialista
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 col-lg-6 p-3">
+            <div class="row">
+              <div *ngIf="!doctorupdate" class="col-12 p-1">
+                <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title">
+                      Doctor
+                    </h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="row p-4">
+                      <div class="col-12 col-md-4 col-lg-3 p-1">
+                        <img [src]="doctor.Photo" class="w-100" alt="foto doctor">
+                      </div>
+                      <div class="col-12 col-md-8 col-lg-9 p-1">
+                        <div class="row">
+                          <div class="col-12 p-1">
+                            <h3>
+                              Nombres y Apellidos: {{doctor.Name + ' ' + doctor.LastName}}
+                            </h3>
+                          </div>
+                          <div class="col-12 col-lg-6 p-1">
+                            Correo:
+                            <br>
+                            {{doctor.Email}}
+                          </div>
+                          <div class="col-12 col-lg-6 p-1">
+                            Colegiatura:
+                            <br>
+                            {{doctor.MedicalSchoolNumber}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                      <button (click)="modificar1()"
+                        type="submit" class="btn btn-primary pull-right">
+                        Modificar
+                      </button>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="doctorupdate" class="col-12 p-1">
+                <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title">
+                      Actualizar Doctor
+                    </h4>
+                  </div>
+                  <div class="card-body">
+                    <form>
+                      <div class="row p-4">
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">
+                              Nombres
+                            </label>
+                            <input name="doctor.Name"
+                            [(ngModel)]="doctor.Name"
+                            type="text" class="form-control"
+                            required minlength="3"
+                            autofocus tabindex="1"
+                            placeholder=".........">
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">
+                              Apellidos
+                            </label>
+                            <input name="doctor.LastName"
+                            [(ngModel)]="doctor.LastName"
+                            type="text" class="form-control"
+                            required minlength="5" tabindex="2"
+                            placeholder=".........">
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">
+                              Correo
+                            </label>
+                            <input name="doctor.Email"
+                            [(ngModel)]="doctor.Email"
+                            type="email" class="form-control"
+                            pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*"
+                            required minlength="5" tabindex="3"
+                            placeholder=".........">
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">
+                              Colegiatura Medica
+                            </label>
+                            <input name="doctor.MedicalSchoolNumber"
+                            [(ngModel)]="doctor.MedicalSchoolNumber"
+                            onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                            type="text" class="form-control"
+                            required minlength="5" tabindex="4"
+                            placeholder=".........">
+                          </div>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                        <div class="col-md-8">
+                          <div class="form-group">
+                            <label>
+                              Imagen
+                            </label>
+                            <br>
+                            <button (click)="changeImg()"
+                            type="button" class="btn btn-primary">
+                              <input type="file"
+                                  name="avatar"
+                                  #file1
+                                  (change)="changeImagen()"
+                                  accept=".png,.jpg,.jpeg">
+                                  Subir Imagen
+                            </button>
+                            <br>
+                            <input name="doctor.Photo"
+                            [(ngModel)]="doctor.Photo"
+                            type="text" class="form-control" readonly>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <img class="rounded-circle"
+                            [src]="doctor.Photo">
+                        </div>
+                      </div>
+                      <button (click)="updateDoctor()" type="submit" class="btn btn-primary pull-right"
+                        [disabled]="(doctor.Name === '' ||  doctor.LastName === '' ||  doctor.Email === '')? true:false">
+                        Actualizar
+                      </button>
+                      <div class="clearfix"></div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6 p-3">
+            <div class="row">
+              <div *ngIf="especialidadupdate === 'view'" class="col-12 p-1">
+                <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title">
+                      Especialidad
+                    </h4>
+                  </div>
+                  <div class="card-body">
+                    <form>
+                      <div class="row p-4">
+                        <div class="col-12 p-1">
+                          <div class="form-group">
+                            <label class="bmd-label-floating" for="codigodoctor">
+                              Especialidad
+                            </label>
+                            <select
+                              (change)='onOptionsSelectedEspecialidad($event)'
+                              id="select-type-basic"
+                              [(ngModel)]="codigoespecialidad"
+                              name="codigoespecialidad"
+                              class="form-control"
+                              required>
+                              <option selected>
+                                Seleccione Especialidad
+                              </option>
+                              <option [value]="obj.id" *ngFor="let obj of especialidades">
+                              {{obj.Name}}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <button (click)="modificar2()"
+                        type="submit" class="btn btn-primary pull-right">
+                        Crear
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="especialidadupdate === 'modif'" class="col-12 p-1">
+                <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title">
+                      Actualizar Especialidad
+                    </h4>
+                  </div>
+                  <div class="card-body">
+                    <form>
+                      <div class="row p-4">
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">
+                              Nombre
+                            </label>
+                            <input name="especialidad.Name"
+                              [(ngModel)]="especialidad.Name"
+                              type="text" class="form-control"
+                              required minlength="5"
+                              autofocus tabindex="1"
+                              placeholder=".........">
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">
+                              Precio
+                            </label>
+                              <input name="especialidad.Price"
+                              [(ngModel)]="especialidad.Price"
+                              type="text" class="form-control"
+                              required minlength="2"
+                              tabindex="2" placeholder=".........">
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">
+                              Resumen
+                            </label>
+                            <textarea name="especialidad.Resume"
+                              [(ngModel)]="especialidad.Resume"
+                              class="form-control"
+                              cols="30" rows="10"
+                              required minlength="20"
+                              tabindex="3"
+                              placeholder="........."></textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-8">
+                          <div class="form-group">
+                            <label>
+                              Imagen
+                            </label>
+                            <br>
+                            <button (click)="changeImg()" type="button" class="btn btn-primary">
+                              <input type="file"
+                                  name="avatar"
+                                  #file1
+                                  (change)="changeImagen()"
+                                  accept=".png,.jpg,.jpeg">
+                                  Subir Imagen
+                            </button>
+                            <br>
+                            <input name="especialidad.Image"
+                            [(ngModel)]="especialidad.Image"
+                            type="text" class="form-control"
+                            readonly>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <img class="rounded-circle" [src]="especialidad.Image">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-8">
+                          <div class="form-group">
+                            <label>
+                              Icono
+                            </label>
+                            <br>
+                            <button (click)="changeIco()" type="button" class="btn btn-primary">
+                              <input type="file"
+                                  name="avatar"
+                                  #file1
+                                  (change)="changeIcono()"
+                                  accept=".png,.jpg,.jpeg">
+                                  Subir Icono
+                            </button>
+                            <br>
+                            <input name="especialidad.Icon"
+                            [(ngModel)]="especialidad.Icon"
+                            type="text" class="form-control"
+                            readonly>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <img class="rounded-circle" [src]="especialidad.Icon">
+                        </div>
+                      </div>
+                      <button (click)="updateEspecialidad()" type="submit" class="btn btn-primary pull-right"
+                        [disabled]="(especialidad.Name === '' ||  especialidad.Resume === '' ||  especialidad.Price === 0)? true:false">
+                        Actualizar
+                      </button>
+                      <div class="clearfix"></div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 p-1">
+            <form>
+              <div class="row p-4">
+                <div class="col-12 col-md-9 col-lg-8">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Turno
+                    </label>
+                    <input name="especialista.Turn"
+                      [(ngModel)]="especialista.Turn"
+                      type="text" class="form-control"
+                      required minlength="3"
+                      tabindex="1" placeholder=".........">
+                  </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-4">
+                  <button (click)="updateEspecialista()"
+                    type="submit" class="btn btn-primary"
+                    [disabled]="(especialista.Turn === '')? true:false">
+                    Actualizar Especialista
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-12 p-1">
+            <button (click)="finish()"
+              type="submit" class="btn btn-primary btn-block">
+              Finalizar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

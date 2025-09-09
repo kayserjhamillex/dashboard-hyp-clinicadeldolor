@@ -1,0 +1,310 @@
+<div class="row">
+  <div class="col-12 col-lg-8 p-1">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title text-center">
+          Citas por Fecha
+        </h4>
+      </div>
+      <div class="card-body">
+        <form class="was-validated">
+          <div class="form-row justify-content-center">
+            <div class="col-12 col-md-6 p-1 col-lg-4">
+              <label class="bmd-label-floating" for="fecha">
+                Fecha de Citas
+              </label>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 p-1">
+              <input type="date"
+              class="form-control"
+              id="fecha" name="fecha"
+              autofocus tabindex="1"
+              [min]="stringmin" [max]="stringmax"
+              [(ngModel)]="fecha" required>
+              <div class="valid-feedback">
+                Campo rellenado.
+              </div>
+              <div class="invalid-feedback">
+                Por favor rellene el campo.
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 p-1">
+              <button (click)="getreservas()" type="button" class="btn btn-primary">
+                Ver Citas
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-12 p-1">
+            <div class="row">
+              <div *ngIf="!bandera" class="col-12 p-1">
+                <h2 class="text-danger text-center">
+                  No hay Citas en esta Fecha
+                </h2>
+              </div>
+              <div *ngIf="bandera" class="col-12 p-1">
+                <div  class="table-responsive">
+                  <table class="table">
+                    <thead class=" text-primary">
+                      <th>
+                        Paciente
+                      </th>
+                      <th>
+                        Especialidad
+                      </th>
+                      <th>
+                        Doctor
+                      </th>
+                      <th>
+                        Estado
+                      </th>
+                      <th>
+                        Tipo
+                      </th>
+                      <th>
+                        Hora
+                      </th>
+                      <th>
+                        ...
+                      </th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of reservas">
+                        <td>
+                          {{item.cliente.Name + ' ' + item.cliente.LastName}}
+                        </td>
+                        <td>
+                          {{item.horario.especialista.especialidad.Name}}
+                        </td>
+                        <td>
+                          {{item.horario.especialista.doctor.Name + ' ' + item.horario.especialista.doctor.LastName}}
+                        </td>
+                        <td>
+                          {{item.Condition}}
+                        </td>
+                        <td>
+                          {{item.Type}}
+                        </td>
+                        <td>
+                          {{item.horario.hora.Start + ' - ' + item.horario.hora.End}}
+                        </td>
+                        <td class="text-primary">
+                          <button (click)="detail(item.id)" type="button" class="btn btn-info">
+                            <span class="material-icons">
+                              visibility
+                            </span>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-lg-4 p-1">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 *ngIf="!banderita" class="text-center">
+          Detalles Cita
+        </h4>
+        <h4 *ngIf="banderita" class="text-center">
+          Codigo de Cita: {{ticket.id}}
+          <br>
+        </h4>
+      </div>
+      <div class="card-body text-center">
+        <div class="row">
+          <div class="col-12 p-1">
+            <h2>
+              Nombres y Apellidos:
+              <br>
+              {{ticket.cliente.Name + ' ' + ticket.cliente.LastName}}
+            </h2>
+          </div>
+          <div class="col-12 p-1">
+            <h3>
+              Especialidad:
+              <br>
+              {{ticket.horario.especialista.especialidad.Name}}
+            </h3>
+          </div>
+          <div class="col-12 p-1">
+            <h4>
+              Doctor:
+              <br>
+              {{ticket.horario.especialista.doctor.Name + ' ' + ticket.horario.especialista.doctor.LastName}}
+            </h4>
+          </div>
+          <div class="col-12 p-1">
+            Cupo: {{ticket.horario.Cupo + ' --- ' + ticket.horario.hora.Start + ' - ' + ticket.horario.hora.End}}
+          </div>
+          <div *ngIf="!filtro" class="col-12 p-1 text-danger">
+            La cita no es del dia de hoy :/
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-12 col-md-6 p-2">
+            <button type="button"
+              *ngIf="banderita && filtro"
+              class="btn btn-primary btn-block"
+              data-toggle="modal"
+              data-target="#ModalSigVital">
+              Registrar Signos Vitales
+            </button>
+          </div>
+          <div class="col-12 col-md-6 p-2">
+            <button type="button"
+              *ngIf="banderita && filtro"
+              class="btn btn-primary btn-block"
+              (click)="novino()">
+              No vino
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="ModalSigVital" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Signos Vitales y Mas
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="p-4">
+          <div class="form-group">
+            <div class="row">
+              <label for="BloodPressure" class="col-12 col-form-label">
+                Referencia:
+              </label>
+              <input
+                name="reservita.Referred"
+                [(ngModel)]="reservita.Referred"
+                minlength="1"
+                autofocus tabindex="1"
+                placeholder="........."
+                type="text"
+                class="form-control col-12 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="BloodPressure" class="col-12 col-form-label">
+                Acompaniante:
+              </label>
+              <input
+                name="reservita.Companion"
+                [(ngModel)]="reservita.Companion"
+                minlength="1"
+                tabindex="2"
+                placeholder="........."
+                type="text"
+                class="form-control col-12 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="BloodPressure" class="col-md-6 col-form-label">
+                Parentesco:
+              </label>
+              <input
+                name="reservita.Relationship"
+                [(ngModel)]="reservita.Relationship"
+                minlength="1"
+                tabindex="3"
+                placeholder="........."
+                type="text"
+                class="form-control col-md-6 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="BloodPressure" class="col-md-6 col-form-label">
+                Precion arterial:
+              </label>
+              <input
+                name="reservita.BloodPressure"
+                [(ngModel)]="reservita.BloodPressure"
+                minlength="1"
+                tabindex="4"
+                placeholder="........."
+                type="text"
+                class="form-control col-md-4 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="HeartRate" class="col-md-6 col-form-label">
+                Frecuencia de Cardiaca:
+              </label>
+              <input name="reservita.HeartRate"
+                [(ngModel)]="reservita.HeartRate"
+                minlength="1" tabindex="5"
+                placeholder="........."
+                type="text" class="form-control col-md-4 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="BreathingFrequency" class="col-md-6 col-form-label">
+                Frecuencia de respiración:
+              </label>
+              <input name="reservita.BreathingFrequency"
+                [(ngModel)]="reservita.BreathingFrequency"
+                minlength="1" tabindex="6"
+                placeholder="........."
+                type="text" class="form-control col-md-4 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="Temperature" class="col-md-6 col-form-label">
+                Temperatura(C°):
+              </label>
+              <input name="reservita.Temperature"
+                [(ngModel)]="reservita.Temperature"
+                minlength="1" tabindex="7"
+                placeholder="........."
+                type="text" class="form-control col-md-4 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="Saturation" class="col-md-6 col-form-label">
+                Oxigenación(SpO2%):
+              </label>
+              <input name="reservita.Saturation"
+                [(ngModel)]="reservita.Saturation"
+                minlength="1" tabindex="8"
+                placeholder="........."
+                type="text" class="form-control col-md-4 text-center">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" tabindex="10" class="btn btn-secondary" data-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="button" (click)="completado()" tabindex="9" class="btn btn-primary" data-dismiss="modal" >
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

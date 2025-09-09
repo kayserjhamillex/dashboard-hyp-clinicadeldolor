@@ -1,0 +1,137 @@
+#logo{
+	width: 200px;
+	height: 200px;
+	margin-left: auto;
+  margin-right: auto;
+  display:block;
+}
+.colorcito {
+  background-color: #d576e4;
+  color: aliceblue;
+}
+label {
+  color: #913f9e;
+}
+.fondo {
+  background-color: hsl(293deg 62% 56% / 64%);
+  font-family: arial;
+}
+.fl-left {
+    float: left
+}
+
+.fl-right {
+    float: right
+}
+
+.carta {
+    display: table-row;
+    width: 100%;
+    background-color: #fff;
+    color: #000000;
+    margin-bottom: 10px;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    border-radius: 4px;
+    position: relative
+}
+
+.carta+.carta {
+    margin-left: 2%
+}
+
+.carta .date {
+    display: table-cell;
+    width: 35%;
+    position: relative;
+    text-align: center;
+    border-right: 2px dashed hsl(293deg 62% 56% / 64%);
+}
+
+.date:before,
+.date:after {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-color: hsl(293deg 62% 56% / 64%);
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    z-index: 1;
+    border-radius: 50%
+}
+
+.date:after {
+    top: auto;
+    bottom: -15px
+}
+
+.date time {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%)
+}
+
+time, time h6 {
+  color: black;
+  font-weight: bold;
+}
+
+.date time span {
+    display: block
+}
+
+.carta .carta-cont {
+    display: table-cell;
+    width: 75%;
+    font-size: 85%;
+    padding: 10px 10px 30px 50px
+}
+
+.carta-cont h1,
+.carta-cont h2,
+.carta-cont h3,
+.carta-cont h4,
+.carta-cont h5,
+.carta-cont h6,
+.carta-cont span
+{
+    color: black;
+    font-weight: bold;
+}
+
+.carta-cont>div {
+    display: table-row
+}
+
+.carta-cont .even-date i,
+.carta-cont .even-info i {
+    padding: 5% 5% 0 0
+}
+
+.carta-cont .even-info p {
+    padding: 30px 50px 0 0
+}
+
+
+@media screen and (max-width: 860px) {
+    .carta {
+        display: block;
+        float: none;
+        width: 100%;
+        margin-bottom: 10px
+    }
+    .carta+.carta {
+        margin-left: 0
+    }
+    .carta-cont .even-date,
+    .carta-cont .even-info {
+        font-size: 75%
+    }
+}
+

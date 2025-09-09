@@ -1,0 +1,139 @@
+<div class="row">
+  <div class="col-12 col-lg-6 p-1">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Paciente
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 col-md-4 col-lg-3 p-2">
+            <img [src]="ticket.cliente.Photo" alt="" class="w-100 rounded-circle">
+          </div>
+          <div class="col-12 col-md-8 col-lg-7 p-2">
+            <div class="row">
+              <div class="col-12 p-1">
+                Nombre Completo:
+                <br>
+                {{ticket.cliente.Name + ' ' + ticket.cliente.LastName}}
+              </div>
+              <div class="col-12 p-1">
+                Documento: {{ticket.cliente.DocumentNumber}}
+              </div>
+              <div class="col-12 p-1">
+                Correo: {{ticket.cliente.Email}}
+              </div>
+              <div class="col-12 p-1">
+                Celular: {{ticket.cliente.Phone}}
+              </div>
+              <div class="col-12 p-1">
+                Direccion:
+                <br>
+                {{ticket.cliente.Direction}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-lg-6 p-1">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          funsiones Vitales
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <!-- <div class="col-12 col-md-3 col-lg-2 p-1">
+            <img [src]="ticket.cliente.Photo" alt="" class="w-100">
+          </div> -->
+          <div class="col-12 col-md-8 col-lg-9 p-1 m-auto">
+            <form class="p-4">
+              <div class="form-group">
+                <div class="row">
+                  <label for="BloodPressure" class="col-md-6 col-form-label">
+                    Precion arterial:
+                  </label>
+                  <input
+                    name="reserva.BloodPressure"
+                    [(ngModel)]="reserva.BloodPressure"
+                    minlength="1"
+                    autofocus tabindex="1"
+                    placeholder="........."
+                    type="text"
+                    class="form-control col-md-4 text-center">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <label for="HeartRate" class="col-md-6 col-form-label">
+                    Frecuencia de Cardiaca:
+                  </label>
+                  <input name="reserva.HeartRate"
+                    [(ngModel)]="reserva.HeartRate"
+                    minlength="1" tabindex="2"
+                    placeholder="........."
+                    type="text" class="form-control col-md-4 text-center">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <label for="BreathingFrequency" class="col-md-6 col-form-label">
+                    Frecuencia de respiración:
+                  </label>
+                  <input name="reserva.BreathingFrequency"
+                    [(ngModel)]="reserva.BreathingFrequency"
+                    minlength="1" tabindex="2"
+                    placeholder="........."
+                    type="text" class="form-control col-md-4 text-center">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <label for="Temperature" class="col-md-6 col-form-label">
+                    Temperatura(C°):
+                  </label>
+                  <input name="reserva.Temperature"
+                    [(ngModel)]="reserva.Temperature"
+                    minlength="1" tabindex="2"
+                    placeholder="........."
+                    type="text" class="form-control col-md-4 text-center">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <label for="Saturation" class="col-md-6 col-form-label">
+                    Oxigenación(SpO2%):
+                  </label>
+                  <input name="reserva.Saturation"
+                    [(ngModel)]="reserva.Saturation"
+                    minlength="1" tabindex="2"
+                    placeholder="........."
+                    type="text" class="form-control col-md-4 text-center">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-12 col-md-6 p-2">
+            <button type="button" class="btn btn-primary btn-block" (click)="updateCita()"
+            [disabled]="(reserva.BloodPressure === '' ||  reserva.HeartRate === '' ||  reserva.BreathingFrequency === '' ||  reserva.Temperature === '' ||  reserva.Saturation === '')? true:false">
+              Registrar Signos
+            </button>
+          </div>
+          <div class="col-12 col-md-6 p-2">
+            <button type="button" class="btn btn-primary btn-block" (click)="updateCita()">
+              Sin Registrar Signos
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

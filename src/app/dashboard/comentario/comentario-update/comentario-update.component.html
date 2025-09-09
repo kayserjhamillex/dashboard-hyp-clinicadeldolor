@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Actualizar Comentario
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 col-lg-6 p-1">
+            <div class="card mb-3 carta">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img  *ngIf="ladata.cliente.Photo !== 'imagen'"
+                    [src]="ladata.cliente.Photo"
+                    class="img-fluid rounded-start" alt="...">
+                  <img *ngIf="ladata.cliente.Photo === 'imagen'"
+                    src="../../../../assets/img/faces/clem-onojeghuo-2.jpg"
+                    class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      {{ladata.cliente.Name + ' ' + ladata.cliente.LastName}}
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6 p-1">
+            <form>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Comentario
+                    </label>
+                    <textarea
+                    name="comentario.Comment"
+                    [(ngModel)]="comentario.Comment"
+                    class="form-control"
+                    cols="30" rows="10"
+                    required minlength="20"
+                    autofocus tabindex="1"
+                    placeholder="........."></textarea>
+                  </div>
+                </div>
+              </div>
+              <button (click)="updateComentario()" type="submit" class="btn btn-primary pull-right"
+                [disabled]="(comentario.Comment === '')? true:false">
+                Actualizar
+              </button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

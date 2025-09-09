@@ -1,0 +1,110 @@
+<div class="row">
+  <div class="col-12 col-lg-6 p-3">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Tipo
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="row p-4">
+          <div class="col-12 p-1">
+            <h2>
+              Tipo:
+              <br>
+              {{tipo.Name}}
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-lg-6 p-3">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Crear Examen Laboratorio
+        </h4>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="row p-4">
+            <div class="col-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Nombre
+                </label>
+                <br>
+                <input name="laboratorio.Name"
+                  [(ngModel)]="laboratorio.Name"
+                  type="text" class="form-control"
+                  required minlength="3"
+                  autofocus tabindex="1"
+                  placeholder=".........">
+              </div>
+            </div>
+            <br>
+            <div class="col-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Precio
+                </label>
+                <br>
+                <input name="laboratorio.Price"
+                [(ngModel)]="laboratorio.Price"
+                type="text" class="form-control"
+                required minlength="2"
+                tabindex="2"
+                placeholder="Precio ....">
+              </div>
+            </div>
+            <br>
+            <div class="col-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Placa o Placas
+                </label>
+                <br>
+                <input name="laboratorio.Plurality"
+                [(ngModel)]="laboratorio.Plurality"
+                type="text" class="form-control"
+                required minlength="5"
+                tabindex="3"
+                placeholder="placa o placas">
+              </div>
+            </div>
+            <br>
+            <div class="col-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Detalle
+                </label>
+                <br>
+                <textarea name="laboratorio.Detail"
+                  [(ngModel)]="laboratorio.Detail"
+                  class="form-control"
+                  required minlength="10"
+                  tabindex="4"
+                  placeholder="........."
+                  cols="30" rows="10"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 p-1">
+            <button (click)="saveLaboratorio()" type="submit" class="btn btn-primary pull-right"
+              [disabled]="(laboratorio.Name === '' ||  laboratorio.Detail === '' ||  laboratorio.Price === 0 ||  laboratorio.TipodosId === 0)? true:false">
+              Crear
+            </button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="col-12 p-1">
+    <button (click)="finish()" type="submit" class="btn btn-primary pull-right"
+      [disabled]="(laboratorio1.id === 0)? true:false">
+      Terminar
+    </button>
+  </div> -->
+</div>

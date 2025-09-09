@@ -1,0 +1,150 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Actualizar empresa
+        </h4>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Nombre
+                </label>
+                <input name="empresa.Name"
+                [(ngModel)]="empresa.Name"
+                type="text"
+                class="form-control">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Razon Social
+                </label>
+                <input name="empresa.BusinessName"
+                [(ngModel)]="empresa.BusinessName"
+                type="text"
+                class="form-control">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Direccion
+                </label>
+                <input name="empresa.Address"
+                [(ngModel)]="empresa.Address"
+                type="text"
+                class="form-control">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Correo
+                </label>
+                <input name="empresa.Email"
+                [(ngModel)]="empresa.Email"
+                type="email"
+                class="form-control">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Celular
+                </label>
+                <input name="empresa.Phone"
+                [(ngModel)]="empresa.Phone"
+                type="text"
+                class="form-control">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Celular 2
+                </label>
+                <input name="empresa.Phone2"
+                [(ngModel)]="empresa.Phone2"
+                type="text"
+                class="form-control">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Mision
+                </label>
+                <textarea
+                  name="empresa.Mision"
+                  [(ngModel)]="empresa.Mision"
+                  class="form-control"
+                  cols="30" rows="10"></textarea>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Vision
+                </label>
+                <textarea
+                  name="empresa.Vision"
+                  [(ngModel)]="empresa.Vision"
+                  class="form-control"
+                  cols="30" rows="10"></textarea>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Historia
+                </label>
+                <textarea
+                  name="empresa.History"
+                  [(ngModel)]="empresa.History"
+                  class="form-control"
+                  cols="30" rows="10"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label>
+                  Logo
+                </label>
+                <br>
+                <button (click)="changeLogo()" type="button"
+                class="btn btn-primary">
+                  <input type="file"
+                      name="avatar"
+                      #file1
+                      (change)="changeLogito()"
+                      accept=".png,.jpg,.jpeg">
+                      Subir Logo
+                </button>
+                <br>
+                <input name="empresa.Logo"
+                [(ngModel)]="empresa.Logo"
+                type="text" class="form-control" readonly>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <img class="rounded-circle w-100" [src]="empresa.Logo">
+            </div>
+          </div>
+          <button (click)="updateEmpresa()" type="submit" class="btn btn-primary pull-right"
+          [disabled]="(empresa.Name === '' ||  empresa.BusinessName === '' ||  empresa.Address === '' ||  empresa.Email === '' ||  empresa.Phone === '' ||  empresa.Phone2 === '' ||  empresa.Mision === '' ||  empresa.Vision === '' ||  empresa.History === '' ||  empresa.Logo === '')? true:false">
+            Actualizar
+          </button>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

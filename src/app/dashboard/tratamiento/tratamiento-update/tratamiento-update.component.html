@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Actualizar tratamiento
+        </h4>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Nombre
+                </label>
+                <input name="tratamiento.Name"
+                  [(ngModel)]="tratamiento.Name"
+                  type="text" class="form-control"
+                  required minlength="3"
+                  autofocus tabindex="1"
+                  placeholder=".........">
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Precio
+                </label>
+                <input name="tratamiento.Price"
+                [(ngModel)]="tratamiento.Price"
+                type="text" class="form-control"
+                required minlength="3"
+                tabindex="1"
+                placeholder=".........">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Detalle
+                </label>
+                <textarea name="tratamiento.Detail"
+                  [(ngModel)]="tratamiento.Detail"
+                  class="form-control"
+                  required minlength="20"
+                  tabindex="2"
+                  placeholder="........."
+                  cols="30" rows="10"></textarea>
+              </div>
+            </div>
+          </div>
+          <button (click)="updateTratamiento()" type="submit" class="btn btn-primary pull-right"
+            [disabled]="(tratamiento.Name === '' ||  tratamiento.Price === 0 ||  tratamiento.Detail === '')? true:false">
+            Actualizar
+          </button>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

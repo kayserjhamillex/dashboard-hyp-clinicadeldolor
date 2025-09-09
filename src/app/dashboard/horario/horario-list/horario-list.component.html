@@ -1,0 +1,380 @@
+<div class="row">
+  <div class="col-12 col-lg-3 p-2">
+    <button (click)="crear()" type="button" class="btn btn-primary">
+      Crear Nuevo Horario
+    </button>
+  </div>
+  <div class="col-12 col-lg-9 p-2">
+    <div class="row">
+      <div class="col-12 col-lg-6 p-2" *ngFor="let obj of doctores">
+        <button (click)="ver(obj.id)" type="button"
+          data-toggle="modal" data-target="#ViewModal"
+          class="btn btn-primary btn-lg btn-block btn-pill">
+          {{obj.Name + ' ' + obj.LastName}}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 p-2">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title text-center">
+          Horario Turno Mañana
+        </h4>
+      </div>
+      <div class="card-body text-center">
+        <div class="row">
+          <div class="col-6 col-md-4 col-lg-3 col-xl-2 p-2">
+            <h5>
+              Lunes
+            </h5>
+            <br>
+            <div class="row">
+              <div *ngIf="lunesbanderadia" class="col-12">
+                <div class="col-12 p-1" *ngFor="let item1 of lunesturno1">
+                  <div>
+                    <h6>
+                      Cupo: {{item1.Cupo}}
+                      <br>
+                      {{item1.hora.Start + ' - ' + item1.hora.End}}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!lunesbanderadia" class="col-12 p-1">
+                <h6>
+                  No hay horario disponible
+                </h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 col-xl-2 p-2">
+            <h5>
+              Martes
+            </h5>
+            <br>
+            <div class="row">
+              <div *ngIf="martesbanderadia" class="col-12">
+                <div class="col-12 p-1" *ngFor="let item2 of martesturno1">
+                  <div>
+                    <h6>
+                      Cupo: {{item2.Cupo}}
+                      <br>
+                      {{item2.hora.Start + ' - ' + item2.hora.End}}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!martesbanderadia" class="col-12 p-1">
+                <h6>
+                  No hay horario disponible
+                </h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 col-xl-2 p-2">
+            <h5>
+              Miercoles
+            </h5>
+            <br>
+            <div class="row">
+              <div *ngIf="miercolesbanderadia" class="col-12">
+                <div class="col-12 p-1" *ngFor="let item3 of miercolesturno1">
+                  <div>
+                    <h6>
+                      Cupo: {{item3.Cupo}}
+                      <br>
+                      {{item3.hora.Start + ' - ' + item3.hora.End}}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!miercolesbanderadia" class="col-12 p-1">
+                <h6>
+                  No hay horario disponible
+                </h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 col-xl-2 p-2">
+            <h5>
+              Jueves
+            </h5>
+            <br>
+            <div class="row">
+              <div *ngIf="juevesbanderadia" class="col-12">
+                <div class="col-12 p-1" *ngFor="let item4 of juevesturno1">
+                  <div>
+                    <h6>
+                      Cupo: {{item4.Cupo}}
+                      <br>
+                      {{item4.hora.Start + ' - ' + item4.hora.End}}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!juevesbanderadia" class="col-12 p-1">
+                <h6>
+                  No hay horario disponible
+                </h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 col-xl-2 p-2">
+            <h5>
+              Viernes
+            </h5>
+            <br>
+            <div class="row">
+              <div *ngIf="viernesbanderadia" class="col-12">
+                <div class="col-12 p-1" *ngFor="let item5 of viernesturno1">
+                  <div>
+                    <h6>
+                      Cupo: {{item5.Cupo}}
+                      <br>
+                      {{item5.hora.Start + ' - ' + item5.hora.End}}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!viernesbanderadia" class="col-12 p-1">
+                <h6>
+                  No hay horario disponible
+                </h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 col-xl-2 p-2">
+            <h5>
+              Sabado
+            </h5>
+            <br>
+            <div class="row">
+              <div *ngIf="sabadobanderadia" class="col-12">
+                <div class="col-12 p-1" *ngFor="let item6 of sabadoturno1">
+                  <div>
+                    <h6>
+                      Cupo: {{item6.Cupo}}
+                      <br>
+                      {{item6.hora.Start + ' - ' + item6.hora.End}}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!sabadobanderadia" class="col-12 p-1">
+                <h6>
+                  No hay horario disponible
+                </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title text-center">
+          Horario Turno Tarde
+        </h4>
+      </div>
+      <div class="card-body text-center">
+        <div class="row">
+          <div class="col-6 col-md-4 col-lg-3 col-xl-2 p-2">
+            <h5>
+              Lunes
+            </h5>
+            <br>
+            <div class="row">
+              <div *ngIf="lunesbanderatarde" class="col-12">
+                <div class="col-12 p-1" *ngFor="let obj1 of lunesturno2">
+                  <div>
+                    <h6>
+                      Cupo: {{obj1.Cupo}}
+                      <br>
+                      {{obj1.hora.Start + ' - ' + obj1.hora.End}}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!lunesbanderatarde" class="col-12 p-1">
+                <h6>
+                  No hay horario disponible
+                </h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 col-xl-2 p-2">
+            <h5>
+              Martes
+            </h5>
+            <br>
+            <div class="row">
+              <div *ngIf="martesbanderatarde" class="col-12">
+                <div class="col-12 p-1" *ngFor="let obj2 of martesturno2">
+                  <div>
+                    <h6>
+                      Cupo: {{obj2.Cupo}}
+                      <br>
+                      {{obj2.hora.Start + ' - ' + obj2.hora.End}}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!martesbanderatarde" class="col-12 p-1">
+                <h6>
+                  No hay horario disponible
+                </h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 col-xl-2 p-2">
+            <h5>
+              Miercoles
+            </h5>
+            <br>
+            <div class="row">
+              <div *ngIf="miercolesbanderatarde" class="col-12">
+                <div class="col-12 p-1" *ngFor="let obj3 of miercolesturno2">
+                  <div>
+                    <h6>
+                      Cupo: {{obj3.Cupo}}
+                      <br>
+                      {{obj3.hora.Start + ' - ' + obj3.hora.End}}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!miercolesbanderatarde" class="col-12 p-1">
+                <h6>
+                  No hay horario disponible
+                </h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 col-xl-2 p-2">
+            <h5>
+              Jueves
+            </h5>
+            <br>
+            <div class="row">
+              <div *ngIf="juevesbanderatarde" class="col-12">
+                <div class="col-12 p-1" *ngFor="let obj4 of juevesturno2">
+                  <div>
+                    <h6>
+                      Cupo: {{obj4.Cupo}}
+                      <br>
+                      {{obj4.hora.Start + ' - ' + obj4.hora.End}}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!juevesbanderatarde" class="col-12 p-1">
+                <h6>
+                  No hay horario disponible
+                </h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 col-xl-2 p-2">
+            <h5>
+              Viernes
+            </h5>
+            <br>
+            <div class="row">
+              <div *ngIf="viernesbanderatarde" class="col-12">
+                <div class="col-12 p-1" *ngFor="let obj5 of viernesturno2">
+                  <div>
+                    <h6>
+                      Cupo: {{obj5.Cupo}}
+                      <br>
+                      {{obj5.hora.Start + ' - ' + obj5.hora.End}}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!viernesbanderatarde" class="col-12 p-1">
+                <h6>
+                  No hay horario disponible
+                </h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 col-xl-2 p-2">
+            <h5>
+              Sabado
+            </h5>
+            <br>
+            <div class="row">
+              <div *ngIf="sabadobanderatarde" class="col-12">
+                <div class="col-12 p-1" *ngFor="let obj6 of sabadoturno2">
+                  <div>
+                    <h6>
+                      Cupo: {{obj6.Cupo}}
+                      <br>
+                      {{obj6.hora.Start + ' - ' + obj6.hora.End}}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!sabadobanderatarde" class="col-12 p-1">
+                <h6>
+                  No hay horario disponible
+                </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="ViewModal" tabindex="-1" role="dialog" aria-labelledby="ViewModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header modal-header-primary">
+        <h5 class="modal-title text-center" id="ViewModalLabel">
+          Especialidades
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Especialidad
+              </th>
+              <th>
+                ...
+              </th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of especialistas">
+                <td>
+                  {{item.especialidad.Name}}
+                </td>
+                <td class="text-primary">
+                  <button (click)="viewhorario(item.id)" type="button" class="btn btn-info" data-dismiss="modal">
+                    <span class="material-icons">
+                      visibility
+                    </span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

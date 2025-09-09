@@ -1,0 +1,138 @@
+<div class="row">
+  <div class="col-lg-8 col-md-6">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title text-center">
+          Reservas por Pagar
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <tr>
+                <th>
+                  Cliente
+                </th>
+                <th>
+                  Fecha
+                </th>
+                <th>
+                  Pago
+                </th>
+                <th>
+                  Estado
+                </th>
+                <th>
+                  ...
+                </th>
+                <th>
+                  ...
+                </th>
+                <th>
+                  ...
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let obj of lasreservas">
+                <td>
+                  {{obj.cliente.Name + ' ' + obj.cliente.LastName}}
+                </td>
+                <td>
+                  {{obj.Appointment}}
+                </td>
+                <td>
+                  {{obj.Pay}}
+                </td>
+                <td>
+                  {{obj.createdAt}}
+                </td>
+                <td>
+                  <button (click)="borrar(obj.id)" type="button"
+                    class="btn btn-pill btn-block btn-danger">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </td>
+                <td>
+                  <button (click)="seleccionar(obj.ClienteId)" type="button"
+                    class="btn btn-pill btn-block btn-info">
+                    <i class="far fa-comment"></i>
+                  </button>
+                </td>
+                <td>
+                  <button (click)="pagado(obj.id)" type="button"
+                    class="btn btn-pill btn-block btn-success">
+                    <i class="fas fa-hand-holding-usd"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 col-md-6">
+    <div class="card" id="elchat">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title text-center">
+          Chat de: {{chatmodel1.cliente.Name + ' ' + chatmodel1.cliente.LastName}}
+        </h4>
+      </div>
+      <div class="card-body overflow-auto">
+        <div class="conteiner">
+          <div class="row">
+            <div class="col-12" *ngFor="let item of mensajes">
+              <div
+              class="shadow-sm col-10 m-auto p-2 border border-primary rounded text-primary d-flex justify-content-start"
+              *ngIf="item.Direction === 'izquierda'">
+                <h3 *ngIf="item.Message.substring(0,5) !== 'https'">
+                  {{item.Message}}
+                </h3>
+                <img *ngIf="item.Message.substring(0,5) === 'https'" [src]="item.Message" alt="">
+              </div>
+              <br>
+              <div
+              class="shadow-sm col-10 m-auto p-2 border border-success rounded text-success d-flex justify-content-end"
+              *ngIf="item.Direction === 'derecha'">
+                <h3 *ngIf="item.Message.substring(0,5) !== 'https'">
+                  {{item.Message}}
+                </h3>
+                <img *ngIf="item.Message.substring(0,5) === 'https'"
+                  [src]="item.Message" alt="">
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <form class="was-validated">
+          <div class="row">
+            <div class="col-10">
+              <div class="form-group">
+                <input type="text" class="form-control"
+                  id="Fullname" name="Fullname"
+                  [(ngModel)]="mensaje.Message" required>
+                <div class="valid-feedback">
+                  Campo rellenado.
+                </div>
+                <div class="invalid-feedback">
+                  Por favor rellene el campo.
+                </div>
+              </div>
+            </div>
+            <div class="col-2">
+              <button type="submit" (click)="anwerchat(mensaje.Message)"
+                class="btn btn-outline-info btn-lg btn-block btn-pill"
+                [disabled]="(mensaje.Message === '')? true:false">
+                <i class="far fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

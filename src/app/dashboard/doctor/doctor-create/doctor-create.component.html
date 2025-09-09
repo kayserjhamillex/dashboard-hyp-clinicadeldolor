@@ -1,0 +1,101 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Crear Doctor
+        </h4>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Nombres
+                </label>
+                <input name="doctor.Name"
+                [(ngModel)]="doctor.Name"
+                type="text" class="form-control"
+                required minlength="3"
+                autofocus tabindex="1"
+                placeholder=".........">
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Apellidos
+                </label>
+                <input name="doctor.LastName"
+                [(ngModel)]="doctor.LastName"
+                type="text" class="form-control"
+                required minlength="5" tabindex="2"
+                placeholder=".........">
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Correo
+                </label>
+                <input name="doctor.Email"
+                [(ngModel)]="doctor.Email"
+                type="email" class="form-control"
+                pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*"
+                required minlength="5" tabindex="3"
+                placeholder=".........">
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Colegiatura Medica
+                </label>
+                <input name="doctor.MedicalSchoolNumber"
+                [(ngModel)]="doctor.MedicalSchoolNumber"
+                onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                type="text" class="form-control"
+                required minlength="6" tabindex="4"
+                placeholder=".........">
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label>
+                  Imagen
+                </label>
+                <br>
+                <button (click)="changeImg()"
+                type="button" class="btn btn-primary">
+                  <input type="file"
+                      name="avatar"
+                      #file1
+                      (change)="changeImagen()"
+                      accept=".png,.jpg,.jpeg">
+                      Subir Imagen
+                </button>
+                <br>
+                <input name="doctor.Photo"
+                [(ngModel)]="doctor.Photo"
+                type="text" class="form-control" readonly>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <img class="rounded-circle"
+                [src]="doctor.Photo">
+            </div>
+          </div>
+          <button (click)="saveDoctor()" type="submit" class="btn btn-primary pull-right"
+            [disabled]="(doctor.Name === '' ||  doctor.LastName === '' ||  doctor.Photo === '' ||  doctor.Email === '' ||  doctor.MedicalSchoolNumber === '')? true:false">
+            Crear
+          </button>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

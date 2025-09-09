@@ -1,0 +1,276 @@
+<div class="row">
+  <div class="col-12 col-md-6 p-1">
+    <div class="row">
+      <div class="col-12 p-1">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title">
+              Fecha
+            </h4>
+          </div>
+          <div class="card-body">
+            <form class="was-validated">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating" for="Name">
+                      Fecha de Cita
+                    </label>
+                    <br>
+                    <input type="date"
+                      class="form-control"
+                      id="fecha" name="fecha"
+                      [min]="stringmin" [max]="stringmax"
+                      [(ngModel)]="fecha" required>
+                    <div class="valid-feedback">
+                      Campo rellenado.
+                    </div>
+                    <div class="invalid-feedback">
+                      Por favor rellene el campo.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 p-1">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title">
+              Especialista
+            </h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>
+                    Imagen
+                  </th>
+                  <th>
+                    Nombres y Apellidos
+                  </th>
+                  <th>
+                    Colegiatura
+                  </th>
+                  <th>
+                    Especialidades
+                  </th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of doctores">
+                    <td>
+                      <img *ngIf="item.Photo !== 'imagen'"
+                        class="rounded-circle"
+                        [src]="item.Photo" alt="foto">
+                      <img *ngIf="item.Photo === 'imagen'"
+                        class="rounded-circle"
+                        src="../../../../assets/img/faces/avatar.jpg"
+                        alt="foto">
+                    </td>
+                    <td>
+                      {{item.Name + ' ' + item.LastName}}
+                    </td>
+                    <td>
+                      {{item.MedicalSchoolNumber}}
+                    </td>
+                    <td class="text-primary">
+                      <button (click)="ver(item.id)"  data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-info">
+                        <span class="material-icons">
+                          visibility
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-6 p-1">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Horario Disponible
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 p-1">
+            <div class="card">
+              <div class="card-header card-header-primary">
+                <h4 class="card-title">
+                  Turno Dia
+                </h4>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div *ngIf="banderadia" class="col-12 p-1">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>
+                              Cupo
+                            </th>
+                            <th>
+                              Turno
+                            </th>
+                            <th>
+                              Lapso
+                            </th>
+                            <th>
+                              ...
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let obj of filtro1horario">
+                            <td>
+                              {{obj.Cupo}}
+                            </td>
+                            <td>
+                              {{obj.hora.Turn}}
+                            </td>
+                            <td>
+                              {{obj.hora.Start}} - {{obj.hora.End}}
+                            </td>
+                            <td>
+                              <button (click)="proseguir(obj.id)" type="button" class="btn btn-primary">
+                                <span class="material-icons">
+                                  perm_contact_calendar
+                                </span>
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div *ngIf="!banderadia && bandera" class="col-12 p-1">
+                    No hay Horario en este Turno
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 p-1">
+            <div class="card">
+              <div class="card-header card-header-primary">
+                <h4 class="card-title">
+                  Turno Tarde
+                </h4>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div *ngIf="banderatarde" class="col-12 p-1">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>
+                              Cupo
+                            </th>
+                            <th>
+                              Turno
+                            </th>
+                            <th>
+                              Lapso
+                            </th>
+                            <th>
+                              ...
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let obj of filtro2horario">
+                            <td>
+                              {{obj.Cupo}}
+                            </td>
+                            <td>
+                              {{obj.hora.Turn}}
+                            </td>
+                            <td>
+                              {{obj.hora.Start}} - {{obj.hora.End}}
+                            </td>
+                            <td>
+                              <button (click)="proseguir(obj.id)" type="button" class="btn btn-primary">
+                                <span class="material-icons">
+                                  perm_contact_calendar
+                                </span>
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div *ngIf="!banderatarde && bandera" class="col-12 p-1">
+                    <h2 class="tect-center">
+                      No hay Horario en este Turno
+                    </h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header modal-header-primary">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Especialidades
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Especialidad
+              </th>
+              <th>
+                ...
+              </th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of especialistas">
+                <td>
+                  {{item.especialidad.Name}}
+                </td>
+                <td class="text-primary">
+                  <button (click)="select(item.id)" type="button" class="btn btn-info" data-dismiss="modal">
+                    <span class="material-icons">
+                      check
+                    </span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,184 @@
+<div class="row">
+  <div class="col-12" *ngIf="botones">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="text-center">
+          Mismo turno y cupo o cambiarlo
+        </h4>
+      </div>
+      <div class="card-body">
+        <button (click)="igual()" type="button" class="btn btn-pill btn-block btn-warning">
+          Mismos Horarios
+        </button>
+        <button (click)="locambio()" type="button" class="btn btn-pill btn-block btn-primary">
+          Cambiar a otro horario
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-12" *ngIf="lomismo">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="text-center">
+          Usted solo cambio la fecha
+        </h4>
+      </div>
+      <div class="card-body">
+        <button *ngIf="conflicto" (click)="locambio()" type="button" class="btn btn-pill btn-block btn-primary">
+          Por favor elija otros horarios
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 p-1" *ngIf="cambiar">
+    <div class="row">
+      <div class="col-12 p-1">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title">
+              Turno Dia
+            </h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div *ngIf="banderadia" class="col-12 p-1">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>
+                          Cupo
+                        </th>
+                        <th>
+                          Turno
+                        </th>
+                        <th>
+                          Lapzo
+                        </th>
+                        <th>
+                          ...
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let obj of filtro1horario">
+                        <td>
+                          {{obj.Cupo}}
+                        </td>
+                        <td>
+                          {{obj.hora.Turn}}
+                        </td>
+                        <td>
+                          {{obj.hora.Start}} - {{obj.hora.End}}
+                        </td>
+                        <td>
+                          <button (click)="postergar(obj.id)" type="button" class="btn btn-primary">
+                            <span class="material-icons">
+                              perm_contact_calendar
+                            </span>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div *ngIf="!banderadia && bandera" class="col-12 p-1">
+                No hay Horario en este Turno
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 p-1">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title">
+              Turno Tarde
+            </h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div *ngIf="banderatarde" class="col-12 p-1">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>
+                          Cupo
+                        </th>
+                        <th>
+                          Turno
+                        </th>
+                        <th>
+                          Lapzo
+                        </th>
+                        <th>
+                          ...
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let obj of filtro2horario">
+                        <td>
+                          {{obj.Cupo}}
+                        </td>
+                        <td>
+                          {{obj.hora.Turn}}
+                        </td>
+                        <td>
+                          {{obj.hora.Start}} - {{obj.hora.End}}
+                        </td>
+                        <td>
+                          <button (click)="postergar(obj.id)" type="button" class="btn btn-primary">
+                            <span class="material-icons">
+                              perm_contact_calendar
+                            </span>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div *ngIf="!banderatarde && bandera" class="col-12 p-1">
+                <h2 class="tect-center">
+                  No hay Horario en este Turno
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="text-center">
+          Horario Disponible
+        </h4>
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Cupo</th>
+              <th>Desde</th>
+              <th>Hasta</th>
+              <th>  </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let obj of horariofiltrado">
+              <td>{{obj.Cupo}}</td>
+              <td>{{obj.hora.Start}}</td>
+              <td>{{obj.hora.End}}</td>
+              <td>
+                elegir
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div> -->
+  </div>
+</div>

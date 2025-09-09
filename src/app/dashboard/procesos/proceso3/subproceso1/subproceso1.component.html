@@ -1,0 +1,362 @@
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="text-center">
+          Paciente
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="col-12" *ngIf="botones">
+          <div class="row">
+            <div class="col-lg-6 p-1">
+              <button (click)="buscarcliente()" type="button" class="btn btn-info btn-lg btn-block btn-pill">
+                Buscar
+              </button>
+            </div>
+            <div class="col-lg-6 campo p-1">
+              <button (click)="crearcliente()" type="button" class="btn btn-info btn-lg btn-block btn-pill">
+                Paciente Externo
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12" *ngIf="buscar">
+          <form id="formSearchCliente" class="was-validated" name="formSearchCliente">
+            <div class="form-group">
+              <label class="form-col-form-label" for="dato">
+                  Poner el numero de DNI
+              </label>
+              <input type="text" class="form-control" id="dato" name="dato" [(ngModel)]="dato" required>
+              <div class="valid-feedback">
+                Campo rellenado.
+              </div>
+              <div class="invalid-feedback">
+                Por favor rellene el campo.
+              </div>
+            </div>
+            <div class="col-12">
+              <button type="submit"  (click)="searchDocCliente()"
+                  class="btn btn-success btn-lg btn-block btn-pill"
+                  [disabled]="(dato === '')? true:false">
+                  DNI
+                </button>
+            </div>
+            <br>
+          </form>
+        </div>
+        <!-- <div class="col-12" *ngIf="crear">
+          <form>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="bmd-label-floating">
+                    Nombres
+                  </label>
+                  <input name="cliente.Name"
+                  [(ngModel)]="cliente.Name"
+                  required minlength="3"
+                  autofocus tabindex="1"
+                  placeholder="........."
+                  type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="bmd-label-floating">
+                    Apellidos
+                  </label>
+                  <input name="cliente.LastName"
+                  [(ngModel)]="cliente.LastName"
+                  required minlength="5" tabindex="2"
+                  placeholder="........."
+                  type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label class="bmd-label-floating">
+                    Direccion
+                  </label>
+                  <input name="cliente.Direction"
+                  [(ngModel)]="cliente.Direction"
+                  required minlength="7" tabindex="3"
+                  placeholder="........."
+                  type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">
+                    Profesion u Ocupacion
+                  </label>
+                  <input name="cliente.Job"
+                  [(ngModel)]="cliente.Job"
+                  required minlength="5" tabindex="4"
+                  placeholder="........."
+                  type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">
+                    Celular
+                  </label>
+                  <input name="cliente.Phone"
+                  [(ngModel)]="cliente.Phone"
+                  onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                  required minlength="9" tabindex="5"
+                  placeholder="........."
+                  type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">
+                    Fecha Nacimiento
+                  </label>
+                  <input type="date"
+                    class="form-control"
+                    max="<?= date('Y-m-d'); ?>"
+                    required tabindex="6"
+                    name="cliente.BirthDate"
+                    [(ngModel)]="cliente.BirthDate"
+                    placeholder="a partir de 25 anios antes">
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">
+                    Correo
+                  </label>
+                  <input name="cliente.Email"
+                  [(ngModel)]="cliente.Email"
+                  pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*"
+                  required minlength="5" tabindex="7"
+                  placeholder="........."
+                  type="email" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">
+                    Num. Documento
+                  </label>
+                  <input name="cliente.DocumentNumber"
+                  [(ngModel)]="cliente.DocumentNumber"
+                  onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                  required minlength="8" tabindex="8"
+                  placeholder="........."
+                  type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">
+                    Genero
+                  </label>
+                  <br>
+                  <select (change)='onOptionsSelected($event)'
+                    id="select-type-basic"
+                    class="form-control"
+                    [(ngModel)]="cliente.Gender"
+                    name="cliente.Gender"
+                    required tabindex="9">
+                    <option selected>
+                      Seleccione su Genero
+                    </option>
+                    <option [value]="obj.name" *ngFor="let obj of genero">
+                    {{obj.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">
+                    Estado Civil
+                  </label>
+                  <br>
+                  <select (change)='onOptionsSelectedStatus($event)'
+                    id="select-type-basic" class="form-control"
+                    [(ngModel)]="cliente.CivilStatus"
+                    name="cliente.CivilStatus"
+                    required tabindex="10">
+                    <option selected>
+                      Seleccione su Estado Civil
+                    </option>
+                    <option [value]="obj.name" *ngFor="let obj of estadocivil">
+                    {{obj.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <button (click)="saveCliente()" type="submit" class="btn btn-primary pull-right"
+            [disabled]="(cliente.Name === '' ||  cliente.LastName === '' ||  cliente.Direction === '' ||  cliente.Job === '' ||  cliente.Phone === '' ||  cliente.Gender === '' ||  cliente.CivilStatus === '' ||  cliente.DocumentNumber === '' ||  cliente.Email === '')? true:false">
+              Crear
+            </button>
+            <div class="clearfix"></div>
+          </form>
+        </div> -->
+        <div class="col-12" *ngIf="datoscliente">
+          <div>
+            <h4 class="text-center">
+              Datos:
+            </h4>
+          </div>
+          <div class="text-center">
+            <h3>
+              Apellidos y Nombres:
+            </h3>
+            <h3>
+              {{cliente1.Name + " " + cliente1.LastName}}
+            </h3>
+            <h3>
+              Correo:
+            </h3>
+            <h3>
+              {{cliente1.Email}}
+            </h3>
+          </div>
+        </div>
+        <div class="col-12" *ngIf="datoscliente">
+          <button (click)="activarbotones()" type="button" class="btn btn-info btn-block">
+            <span class="material-icons">
+              search
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="text-center">
+          Citas Atendidas con deuda de laboratorio
+        </h4>
+      </div>
+      <div class="card-body">
+        <div *ngIf="!datoscliente" class="col-12 p-1">
+          <h1 class="text-center">
+            Aun no hay paciente encontrado
+          </h1>
+        </div>
+        <div *ngIf="datoscliente" class="col-12 p-1">
+          <div  class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <!-- <th>
+                  Especialidad
+                </th>
+                <th>
+                  Doctor
+                </th> -->
+                <th>
+                  Fecha Atencion
+                </th>
+                <th>
+                  Pago
+                </th>
+                <th>
+                  Total
+                </th>
+                <th>
+                  ...
+                </th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of reservas">
+                  <!-- <td>
+                    {{item.horario.especialista.especialidad.Name}}
+                  </td>
+                  <td>
+                    {{item.horario.especialista.doctor.Name + ' ' + item.horario.especialista.doctor.LastName}}
+                  </td> -->
+                  <td>
+                    {{item.Appointment}}
+                  </td>
+                  <td>
+                    s/. {{item.Labamount}}
+                  </td>
+                  <td>
+                    s/. {{item.Labpay}}
+                  </td>
+                  <td class="text-primary">
+                    <button (click)="visualizar(item.id)" type="button" class="btn btn-info" data-toggle="modal"
+                    data-target="#ModalBuyTicket">
+                      <span class="material-icons">
+                        visibility
+                      </span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalBuyTicket" tabindex="-1" role="dialog" aria-labelledby="ModalBuyTicketLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalBuyTicketLabel">
+          Cita con pago o gratuita
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="p-4">
+          <div class="form-group">
+            <div class="row">
+              <label for="BloodPressure" class="col-12 col-form-label">
+                Monto Pagado:
+              </label>
+              <input
+                name="reserva.Labamount"
+                [(ngModel)]="reserva.Labamount"
+                required minlength="2"
+                onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                autofocus tabindex="1"
+                placeholder="........."
+                type="text"
+                class="form-control col-12 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="BloodPressure" class="col-12 col-form-label">
+                Monto Total:
+              </label>
+              <input
+                name="reserva.Labpay"
+                [(ngModel)]="reserva.Labpay"
+                required minlength="2"
+                onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                tabindex="2"
+                placeholder="........."
+                type="text"
+                class="form-control col-12 text-center">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" tabindex="10" class="btn btn-secondary" data-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="button" tabindex="9" class="btn btn-primary" data-dismiss="modal" (click)="completado()">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

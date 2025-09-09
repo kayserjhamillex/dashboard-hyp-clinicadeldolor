@@ -1,0 +1,52 @@
+<div id="frame">
+  <!-- inicio mensajes -->
+  <div class="content">
+    <div class="contact-profile">
+      <img [src]="chatmodel.cliente.Photo"
+        *ngIf="chatmodel.cliente.Photo !== 'imagen'" alt="" />
+      <img *ngIf="chatmodel.cliente.Photo === 'imagen'"
+        src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+      <p>
+        {{chatmodel.cliente.Name + ' ' + chatmodel.cliente.LastName}}
+      </p>
+    </div>
+    <div class="messages">
+      <ul>
+        <li *ngFor="let item of mensajes">
+          <div class="replies" *ngIf="item.Direccion === 'derecha'">
+            <img [src]="admin.Photo" alt="" />
+            <p>
+              {{item.Mensaje}}
+            </p>
+          </div>
+          <div class="sent" *ngIf="item.Direccion === 'izquierda'">
+            <img
+            *ngIf="chatmodel.cliente.Photo !== 'imagen'"
+            [src]="chatmodel.cliente.Photo" alt="" />
+            <img
+            *ngIf="chatmodel.cliente.Photo === 'imagen'"
+            src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+            <p>
+              {{item.Mensaje}}
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="message-input">
+      <div class="wrap">
+        <input type="text"
+          name="mensaje.Message"
+          [(ngModel)]="mensaje.Message"
+          placeholder="Write your message..."
+          required minlength="2"
+          autofocus tabindex="1"/>
+        <button class="submit" (click)="anwerchat(mensaje.Message)"
+        [disabled]="(mensaje.Message === '')? true:false">
+          <i class="fa fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

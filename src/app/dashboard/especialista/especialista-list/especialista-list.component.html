@@ -1,0 +1,317 @@
+<div class="row">
+  <div class="col-12 col-lg-4 p-2">
+    <button (click)="crear()" type="button" class="btn btn-primary">
+      Crear
+    </button>
+  </div>
+  <div *ngIf="vista" class="col-12 col-lg-4 p-2">
+    <button (click)="verotro(!vista)" type="button" class="btn btn-primary">
+      Doctores
+    </button>
+  </div>
+  <div *ngIf="!vista" class="col-12 col-lg-4 p-2">
+    <button (click)="verotro(!vista)" type="button" class="btn btn-primary">
+      Especialidades
+    </button>
+  </div>
+  <br>
+  <div class="col-md-12">
+    <div *ngIf="!vista" class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Lista de Doctores
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Imagen
+              </th>
+              <th>
+                Nombres y Apellidos
+              </th>
+              <th>
+                Colegiatura
+              </th>
+              <th>
+                Especialidades
+              </th>
+              <th>
+                ...
+              </th>
+              <!-- <th>
+                ...
+              </th> -->
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of doctores">
+                <td>
+                  <img *ngIf="item.Photo !== 'imagen'"
+                    class="rounded-circle"
+                    [src]="item.Photo" alt="foto">
+                  <img *ngIf="item.Photo === 'imagen'"
+                    class="rounded-circle"
+                    src="../../../../assets/img/faces/avatar.jpg"
+                    alt="foto">
+                </td>
+                <td>
+                  {{item.Name + ' ' + item.LastName}}
+                </td>
+                <td>
+                  {{item.MedicalSchoolNumber}}
+                </td>
+                <td class="text-primary">
+                  <button (click)="ver(item.id)"
+                    data-toggle="modal" data-target="#ViewModal"
+                    type="button" class="btn btn-info">
+                    <span class="material-icons">
+                      visibility
+                    </span>
+                  </button>
+                </td>
+                <td class="text-primary">
+                  <button (click)="editardoctor(item.id)" type="button" class="btn btn-info">
+                    <span class="material-icons">
+                      edit
+                    </span>
+                  </button>
+                </td>
+                <!-- <td class="text-primary">
+                  <button *ngIf="item.id > 2" (click)="getdatadoctor(item.id)"
+                    type="button" class="btn btn-danger"
+                    data-toggle="modal" data-target="#DeleteDoctorModal">
+                    <span class="material-icons">
+                      delete
+                    </span>
+                  </button>
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div *ngIf="vista" class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Lista de Especialidades
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Imagen
+              </th>
+              <th>
+                Nombre
+              </th>
+              <th>
+                Descripcion
+              </th>
+              <th>
+                Precio
+              </th>
+              <th>
+                ...
+              </th>
+              <!-- <th>
+                ...
+              </th> -->
+            </thead>
+            <tbody>
+              <tr *ngFor="let obj of listaespecialidad">
+                <td>
+                  <img *ngIf="obj.Image !== 'imagen'"
+                    class="rounded-circle"
+                    [src]="obj.Image" alt="foto">
+                  <img *ngIf="obj.Image === 'imagen' || ''"
+                    class="rounded-circle"
+                    src="../../../../assets/img/faces/avatar.jpg"
+                    alt="foto">
+                </td>
+                <td>
+                  {{obj.Name}}
+                </td>
+                <td>
+                  {{obj.Resume}}
+                </td>
+                <td>
+                  {{obj.Price}}
+                </td>
+                <td class="text-primary">
+                  <button (click)="editarespecialidad(obj.id)" type="button" class="btn btn-info">
+                    <span class="material-icons">
+                      edit
+                    </span>
+                  </button>
+                </td>
+                <!-- <td class="text-primary">
+                  <button *ngIf="obj.id > 3" (click)="getdataespecialidad(obj.id)"
+                    type="button" class="btn btn-danger"
+                    data-toggle="modal" data-target="#DeleteEspecialidadModal">
+                    <span class="material-icons">
+                      delete
+                    </span>
+                  </button>
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="ViewModal" tabindex="-1" role="dialog" aria-labelledby="ViewModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header modal-header-primary">
+        <h5 class="modal-title" id="ViewModalLabel">
+          Especialidades
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Especialidad
+              </th>
+              <th>
+                ...
+              </th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of especialistas">
+                <td>
+                  {{item.especialidad.Name}}
+                </td>
+                <td class="text-primary">
+                  <button (click)="editar(item.id)" type="button" class="btn btn-info" data-dismiss="modal">
+                    <span class="material-icons">
+                      edit
+                    </span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">
+          Cerrar
+        </button>
+        <button type="button" class="btn btn-warning" (click)="add(codigodoctor)" data-dismiss="modal">
+          Agregar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="DeleteDoctorModal" tabindex="-1" role="dialog"
+  aria-labelledby="DeleteDoctorModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="DeleteDoctorModalLabel">
+          Estas Seguro(a)?
+        </h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row p-2">
+          <div class="col 12 col-lg-6 p-3">
+            <h5 *ngIf="haycitas" class="text-danger">
+              El doctor registro citas
+              <br>
+              El doctor registro analisis
+              <br>
+              El doctor registro rayos x, tomografias y resonancias magneticas
+            </h5>
+            <h5 *ngIf="!haycitas" class="text-danger">
+              No se registraron citas
+            </h5>
+          </div>
+          <div class="col 12 col-lg-6 p-3">
+            <h5 *ngIf="banderadolor" class="text-danger">
+              El doctor registro citas de medica del dolor
+              <br>
+              El doctor registro dermatomas
+              <br>
+              El doctor registro antecedentes
+              <br>
+              El doctor registro duraciones, frecuencias, examen dn4
+            </h5>
+            <h5 *ngIf="!banderadolor" class="text-danger">
+              No se registraron citas de medica del dolor
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          No
+        </button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deletedoctor(codigoelegidoctor)">
+          Si
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="DeleteEspecialidadModal" tabindex="-1" role="dialog"
+  aria-labelledby="DeleteEspecialidadModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="DeleteEspecialidadModalLabel">
+          Estas Seguro(a)?
+        </h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row p-2">
+          <div class="col 12 p-3">
+            <h5 *ngIf="haycitas" class="text-danger">
+              La especialidad cuenta con citas de pacientes
+              <br>
+              La especialidad cuenta con analisis dados por el doctor
+              <br>
+              La especialidad cuenta con rayos x, tomografias y resonancias magneticas dados por el doctor
+            </h5>
+            <h5 *ngIf="!haycitas" class="text-danger">
+              No se registraron citas
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          No
+        </button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteespecialidad(codigoelegidoespecialidad)">
+          Si
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

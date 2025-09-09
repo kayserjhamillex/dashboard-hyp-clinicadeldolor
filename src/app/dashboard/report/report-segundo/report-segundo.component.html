@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title text-center">
+          Flujo de caja de hoy
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="row p-4">
+          <div *ngIf="!reportetablas" class="col-12 p-2">
+            <h2>
+              Reporte
+            </h2>
+          </div>
+          <div *ngIf="reportetablas" class="col-12 p-2">
+            <button (click)="descargar()" type="button" class="btn btn-primary btn-block">
+              Generar PDF
+            </button>
+            <br>
+            <br>
+            <div class="row" id="parapdf">
+              <div class="col-12 p-1">
+                <div class="row">
+                  <div class="col-12 col-md-3 col-lg-2 p-2">
+                    <img src="../../../../assets/img/logo.png" class="img-responsive w-50" alt="Logo Empresa">
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-7 p-2">
+                    <h4 class="text-center">
+                      Flujo de Caja
+                    </h4>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 p-1">
+                <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title text-center">
+                      Citas Atendidas
+                    </h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead class=" text-primary">
+                          <th>
+                            Doctor
+                          </th>
+                          <th>
+                            Monto
+                          </th>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of reporte">
+                            <td>
+                              {{item.doctor}}
+                            </td>
+                            <td>
+                              {{item.monto}}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 p-2">
+                <h2 *ngIf="!grafico">
+                  Grafico
+                </h2>
+                <div id="chart">
+                  <apx-chart
+                    [series]="chartOptions.series"
+                    [chart]="chartOptions.chart"
+                    [labels]="chartOptions.labels"
+                    [responsive]="chartOptions.responsive"
+                  ></apx-chart>
+                </div>
+              </div>
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

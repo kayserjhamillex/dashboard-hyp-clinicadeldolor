@@ -21,15 +21,24 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/assets"
             ],
             "styles": [
+              "node_modules/ngx-toastr/toastr.css",
+              "src/assets/css/material-dashboard.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/core/jquery.min.js",
+              "src/assets/js/core/popper.min.js",
+              "src/assets/js/core/bootstrap-material-design.min.js",
+              "src/assets/js/plugins/perfect-scrollbar.jquery.min.js",
+              "src/assets/js/plugins/chartist.min.js",
+              "src/assets/js/plugins/bootstrap-notify.js",
+              "src/assets/js/material-dashboard.js",
+              "src/assets/demo/demo.js",
+              "src/assets/js/core/bootstrap-material-design.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -79,15 +88,24 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/assets"
             ],
             "styles": [
+              "node_modules/ngx-toastr/toastr.css",
+              "src/assets/css/material-dashboard.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/core/jquery.min.js",
+              "src/assets/js/core/popper.min.js",
+              "src/assets/js/core/bootstrap-material-design.min.js",
+              "src/assets/js/plugins/perfect-scrollbar.jquery.min.js",
+              "src/assets/js/plugins/chartist.min.js",
+              "src/assets/js/plugins/bootstrap-notify.js",
+              "src/assets/js/material-dashboard.js",
+              "src/assets/demo/demo.js",
+              "src/assets/js/core/bootstrap-material-design.min.js"
+            ]
           }
         }
       }

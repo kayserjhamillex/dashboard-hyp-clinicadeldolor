@@ -1,0 +1,54 @@
+<div id="frame">
+  <!-- inicio chats -->
+  <div id="sidepanel">
+    <div id="profile">
+      <div class="wrap">
+        <img *ngIf="admin.Photo !== 'imagen'"
+        id="profile-img"
+        [src]="admin.Photo"
+        class="online" alt="" />
+        <img *ngIf="admin.Photo == 'imagen'"
+        id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png"
+        class="online" alt="" />
+        <p>
+          {{admin.Name + '' + admin.LastName}}
+        </p>
+        <div id="status-options">
+          <ul>
+            <li id="status-online" class="active"><span class="status-circle"></span>
+              <p>
+                Online
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="contacts">
+      <ul>
+        <li class="contact" *ngFor="let item of chats">
+          <div class="wrap">
+            <span *ngIf="item.Condition === 'responder'"
+            class="contact-status online"></span>
+            <span *ngIf="item.Condition === 'bienvenida'"
+            class="contact-status busy"></span>
+            <span *ngIf="item.Condition === 'enviado'"
+            class="contact-status away"></span>
+            <img *ngIf="item.cliente.Photo === 'imagen'"
+            src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
+            <img *ngIf="item.cliente.Photo !== 'imagen'"
+            [src]="item.cliente.Photo" alt="" />
+            <div class="meta">
+              <p class="name" (click)="select(item.id)">
+                {{item.cliente.Name + ' ' + item.cliente.LastName}}
+              </p>
+              <p class="preview">
+                {{item.CreationDate | date:'dd-MM-yyyy'}}
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

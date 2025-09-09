@@ -1,0 +1,129 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h1 class="text-center">
+          Resultados de Laboratorio
+        </h1>
+      </div>
+      <div class="card-body">
+        <div id="parapdf" class="col-10 m-auto shadow p-5 mb-2 bg-white rounded rounded-lg border border-light fondo">
+          <div class="row">
+            <div class="col-12 cabezera p-4">
+              <div class="row">
+                <div class="col-3 p-1">
+                  <img src="../../../../../assets/img/logolab.png" class="w-50 m-auto" alt="pie de pagina">
+                </div>
+                <div class="col-9 p-1">
+                  <img src="../../../../../assets/img/cabecera.png" class="w-100 text-center" alt="pie de pagina">
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-12 col-lg-6 p-4 border border-primary">
+                  <h6>
+                    <strong>Paciente:</strong> {{ticket.cliente.Name + ' ' + ticket.cliente.LastName}}
+                  </h6>
+                  <h6>
+                    <strong>DNI:</strong> {{ticket.cliente.DocumentNumber}}
+                  </h6>
+                  <h6>
+                    <strong>Edad:</strong> {{laedad}}
+                  </h6>
+                  <h6>
+                    <strong>Sexo:</strong> {{ticket.cliente.Gender}}
+                  </h6>
+                  <h6>
+                    <strong>Empresa:</strong> H&P Clinica del Dolor
+                  </h6>
+                  <h6>
+                    <strong>Medico:</strong> {{ticket.horario.especialista.doctor.Name + ' ' + ticket.horario.especialista.doctor.LastName}}
+                  </h6>
+                </div>
+                <div class="col-12 col-lg-6 p-4 border border-primary">
+                  <h6>
+                    <strong>N° Solicitud:</strong> {{elcodigo}}
+                  </h6>
+                  <h6>
+                    <strong>Fecha de Atención:</strong> {{lafechaatencion | date:'dd-MM-yyyy'}}
+                  </h6>
+                  <h6>
+                    <strong>Fecha de Reporte:</strong> {{lafecharesultado | date:'dd-MM-yyyy'}}
+                  </h6>
+                  <h6>
+                    <strong>Tipo de paciente:</strong> Particular
+                  </h6>
+                  <h6>
+                    <strong>Celular:</strong> {{ticket.cliente.Phone}}
+                  </h6>
+                  <h6>
+                    <strong>Sede:</strong> Huancayo
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 cuerpo p-4">
+              <div class="table-responsive">
+                <table class="table table-bordered border-primary">
+                  <thead class="text-center text-primary fw-bold">
+                    <th>
+                      Analisis
+                    </th>
+                    <th>
+                      Resultado
+                    </th>
+                    <th>
+                      Unidad
+                    </th>
+                    <th>
+                      Rango
+                    </th>
+                    <th>
+                      Metodo
+                    </th>
+                  </thead>
+                  <tbody>
+                    <tr  class="text-center" *ngFor="let item of resultadosdeanalisis">
+                      <td class="text-primary fw-bold">
+                        {{item.laboratorio.Name}}
+                      </td>
+                      <td>
+                        {{item.Result}}
+                      </td>
+                      <td class="text-primary fw-bold">
+                        {{item.Measurement}}
+                      </td>
+                      <td>
+                        {{item.Detail}}
+                      </td>
+                      <td class="text-primary fw-bold">
+                        {{item.Method}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-12 firma p-4">
+              <div class="row justify-content-end">
+                <div class="col-4">
+                  <img src="../../../../../assets/img/firma.png" class="w-75" alt="pie de pagina">
+                </div>
+              </div>
+            </div>
+            <div class="col-12 pie p-1">
+              <img src="../../../../../assets/img/piedepagina.png" class="w-100" alt="pie de pagina">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button type="submit"
+        (click)="descargar()"
+          class="btn btn-primary btn-pill">
+          Generar PDF para imprimir
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,164 @@
+<div class="row">
+  <div class="col-12 p-1">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title text-center">
+          Citas de hoy
+        </h4>
+      </div>
+      <div class="card-body">
+        <form class="was-validated">
+          <div class="form-row justify-content-center">
+            <div class="col-12 col-md-6 p-1 col-lg-4">
+              <label class="bmd-label-floating" for="fecha">
+                Fecha de Citas
+              </label>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 p-1">
+              <input type="date"
+              class="form-control"
+              id="fecha" name="fecha"
+              autofocus tabindex="1"
+              [min]="stringmin" [max]="stringmax"
+              [(ngModel)]="fecha" required>
+              <div class="valid-feedback">
+                Campo rellenado.
+              </div>
+              <div class="invalid-feedback">
+                Por favor rellene el campo.
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 p-1">
+              <button (click)="getreservas()" type="button" class="btn btn-primary">
+                Ver Citas
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-12 p-1">
+            <div class="row">
+              <div *ngIf="!bandera" class="col-12 p-1">
+                <h2 class="text-danger text-center">
+                  No hay Citas en esta Fecha
+                </h2>
+              </div>
+              <div *ngIf="bandera" class="col-12 p-1">
+                <div  class="table-responsive">
+                  <table class="table">
+                    <thead class=" text-primary">
+                      <th>
+                        Paciente
+                      </th>
+                      <th>
+                        Especialidad
+                      </th>
+                      <th>
+                        Doctor
+                      </th>
+                      <th>
+                        Estado
+                      </th>
+                      <th>
+                        Hora
+                      </th>
+                      <th>
+                        ...
+                      </th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of reservas">
+                        <td>
+                          {{item.cliente.Name + ' ' + item.cliente.LastName}}
+                        </td>
+                        <td>
+                          {{item.horario.especialista.especialidad.Name}}
+                        </td>
+                        <td>
+                          {{item.horario.especialista.doctor.Name + ' ' + item.horario.especialista.doctor.LastName}}
+                        </td>
+                        <td>
+                          {{item.Condition}}
+                        </td>
+                        <td>
+                          {{item.horario.hora.Start + ' - ' + item.horario.hora.End}}
+                        </td>
+                        <td class="text-primary">
+                          <button (click)="detail(item.id)" type="button" class="btn btn-info" data-toggle="modal"
+                          data-target="#ModalBuyTicket">
+                            <span class="material-icons">
+                              visibility
+                            </span>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="ModalBuyTicket" tabindex="-1" role="dialog" aria-labelledby="ModalBuyTicketLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalBuyTicketLabel">
+          Cita con pago o gratuita
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="p-4">
+          <div class="form-group">
+            <div class="row">
+              <label for="BloodPressure" class="col-12 col-form-label">
+                Monto Pagado:
+              </label>
+              <input
+                name="reserva.Amount"
+                [(ngModel)]="reserva.Amount"
+                required minlength="2"
+                onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                autofocus tabindex="1"
+                placeholder="........."
+                type="text"
+                class="form-control col-12 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="BloodPressure" class="col-12 col-form-label">
+                Monto Total:
+              </label>
+              <input
+                name="reserva.Pay"
+                [(ngModel)]="reserva.Pay"
+                required minlength="2"
+                onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                tabindex="2"
+                placeholder="........."
+                type="text"
+                class="form-control col-12 text-center">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" tabindex="10" class="btn btn-secondary" data-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="button" tabindex="9" class="btn btn-primary" data-dismiss="modal" (click)="completado()">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

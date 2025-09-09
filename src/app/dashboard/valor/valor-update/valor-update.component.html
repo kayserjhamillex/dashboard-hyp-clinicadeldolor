@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Actualizar Valor
+        </h4>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Valor
+                </label>
+                <input name="valor.Name"
+                [(ngModel)]="valor.Name"
+                type="text" class="form-control"
+                required minlength="3"
+                autofocus tabindex="1"
+                placeholder=".........">
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Detalle
+                </label>
+                <textarea name="valor.Detail"
+                  [(ngModel)]="valor.Detail"
+                  class="form-control"
+                  required minlength="20"
+                  tabindex="2"
+                  placeholder="........."
+                  cols="30" rows="10"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label>
+                  Imagen
+                </label>
+                <br>
+                <button (click)="changeImg()" type="button" class="btn btn-primary">
+                  <input type="file"
+                      name="avatar"
+                      #file1
+                      (change)="changeImagen()"
+                      accept=".png,.jpg,.jpeg">
+                      Subir Imagen
+                </button>
+                <br>
+                <input name="valor.Image"
+                [(ngModel)]="valor.Image"
+                type="text" class="form-control"
+                readonly>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <img class="rounded-circle" [src]="valor.Image">
+            </div>
+          </div>
+          <button (click)="updateValor()" type="submit" class="btn btn-primary pull-right"
+            [disabled]="(valor.Name === '' ||  valor.Detail === '' ||  valor.Image === '')? true:false">
+            Actualizar
+          </button>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

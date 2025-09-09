@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="text-center">
+          Buscar Cliente
+        </h4>
+      </div>
+      <div class="card-body">
+        <form *ngIf="!respuesta" id="formSearchCliente" class="was-validated" name="formSearchCliente">
+          <div class="form-group">
+            <label class="form-col-form-label" for="Dato">
+                Poner el Numero de Documento
+            </label>
+            <input type="text" class="form-control" id="Dato" name="Dato" [(ngModel)]="dato" required>
+            <div class="valid-feedback">
+              Campo rellenado.
+            </div>
+            <div class="invalid-feedback">
+              Por favor rellene el campo.
+            </div>
+          </div>
+          <div class="row">
+            <!-- <div class="col-lg-6 col-12 campo">
+              <button type="submit" (click)="searchEmailCliente()"
+              class="btn btn-primary btn-lg btn-block btn-pill"
+              [disabled]="(dato === '')? true:false">
+                Por Correo
+              </button>
+            </div> -->
+            <div class="col-12">
+              <button type="submit" (click)="searchDocCliente()"
+              class="btn btn-primary btn-lg btn-block btn-block"
+              [disabled]="(dato === '')? true:false">
+                Documento
+              </button>
+            </div>
+          </div>
+          <br>
+        </form>
+        <h2 class="text-center">
+          Cliente: {{cliente.Name + ' ' + cliente.LastName}}
+        </h2>
+        <br>
+        <table *ngIf="respuesta" class="table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Estado</th>
+              <th>Doctor</th>
+              <th>Especialidad</th>
+              <th>Cupo</th>
+              <th>Lapzo</th>
+              <th>  </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let obj of clientbooking">
+              <td>
+                {{obj.Appointment}}
+              </td>
+              <td>
+                {{obj.Condition}}
+              </td>
+              <td>
+                {{obj.horario.especialista.doctor.Name + ' ' + obj.horario.especialista.doctor.LastName}}
+              </td>
+              <td>
+                {{obj.horario.especialista.especialidad.Name}}
+              </td>
+              <td>
+                {{obj.horario.Cupo}}
+              </td>
+              <td>
+                {{obj.horario.hora.Start + '-' + obj.horario.hora.End}}
+              </td>
+              <td>
+                <button (click)="detalles(obj.id)" type="button" class="btn btn-pill btn-block btn-primary">
+                  Detalles
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

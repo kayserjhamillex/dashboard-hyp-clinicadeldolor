@@ -1,0 +1,114 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Actualizar especialidad
+        </h4>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Nombre
+                </label>
+                <input name="especialidad.Name"
+                  [(ngModel)]="especialidad.Name"
+                  type="text" class="form-control"
+                  required minlength="5"
+                  autofocus tabindex="1"
+                  placeholder=".........">
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Resumen
+                </label>
+                <textarea name="especialidad.Resume"
+                  [(ngModel)]="especialidad.Resume"
+                  class="form-control"
+                  cols="30" rows="10"
+                  required minlength="20"
+                  tabindex="2"
+                  placeholder="........."></textarea>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">
+                  Precio
+                </label>
+                  <input name="especialidad.Price"
+                  [(ngModel)]="especialidad.Price"
+                  type="text" class="form-control"
+                  required minlength="2"
+                  tabindex="3" placeholder=".........">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label>
+                  Imagen
+                </label>
+                <br>
+                <button (click)="changeImg()" type="button" class="btn btn-primary">
+                  <input type="file"
+                      name="avatar"
+                      #file1
+                      (change)="changeImagen()"
+                      accept=".png,.jpg,.jpeg">
+                      Subir Imagen
+                </button>
+                <br>
+                <input name="especialidad.Image"
+                [(ngModel)]="especialidad.Image"
+                type="text" class="form-control"
+                readonly>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <img class="rounded-circle img-fluid" [src]="especialidad.Image">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label>
+                  Icono
+                </label>
+                <br>
+                <button (click)="changeIco()" type="button" class="btn btn-primary">
+                  <input type="file"
+                      name="avatar"
+                      #file2
+                      (change)="changeIcono()"
+                      accept=".png,.jpg,.jpeg">
+                      Subir Icono
+                </button>
+                <br>
+                <input name="especialidad.Icon"
+                [(ngModel)]="especialidad.Icon"
+                type="text" class="form-control"
+                readonly>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <img class="rounded-circle img-fluid" [src]="especialidad.Icon">
+            </div>
+          </div>
+          <button (click)="updateEspecialidad()" type="submit" class="btn btn-primary pull-right"
+            [disabled]="(especialidad.Name === '' ||  especialidad.Resume === '' ||  especialidad.Price === 0 ||  especialidad.Image === '' ||  especialidad.Icon === '')? true:false">
+            Actualizar
+          </button>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<p>especialista-edit-especialidad works!</p>

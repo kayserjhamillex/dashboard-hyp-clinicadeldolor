@@ -1,0 +1,315 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="text-center">
+          La Reserva
+        </h4>
+      </div>
+      <div class="card-body">
+        <form
+          id="formSearch"
+          class="was-validated"
+          name="formSearch">
+          <div class="form-group">
+            <label for="dato"
+              class="form-col-form-label">
+              Codigo
+            </label>
+            <br>
+            <input type="text"
+              class="form-control"
+              id="dato" name="dato"
+              [(ngModel)]="dato" required>
+            <div class="valid-feedback">
+              Campo rellenado.
+            </div>
+            <div class="invalid-feedback">
+              Por favor rellene el campo.
+            </div>
+          </div>
+          <div>
+            <button type="submit" (click)="buscar(dato)"
+              class="btn btn-primary btn-lg btn-block btn-pill"
+              [disabled]="(dato === '')? true:false">
+              buscar
+            </button>
+          </div>
+        </form>
+        <br>
+        <br>
+        <div *ngIf="sebusco" class="col-12 fondo p-4">
+          <section class="container">
+            <div class="row">
+              <article class="carta">
+                <section class="date">
+                  <time datetime="23th feb">
+                    <h6>
+                      Codigo: {{ticket.id}}
+                    </h6>
+                    <span>
+                      Fecha: {{lafecha}}
+                    </span>
+                    Dia:  {{ticket.horario.Day + ' - ' + ticket.horario.hora.Turn}}  <br>  Cupo: {{ticket.horario.Cupo}}
+                    <br> Lapzo: {{ticket.horario.hora.Start + ' - ' + ticket.horario.hora.End}}
+                  </time>
+                </section>
+                <section class="carta-cont">
+                  <h1>
+                    Codigo: {{ticket.id}}
+                  </h1>
+                  <h3>
+                    Nombres y Apellidos:
+                    {{ticket.cliente.Name + ' ' + ticket.cliente.LastName}}
+                  </h3>
+                  <h3>
+                    Tipo: {{ticket.Type}}
+                  </h3>
+                  <h3>
+                    {{ticket.Condition}}
+                  </h3>
+                  <div class="even-date">
+                    <time>
+                      <i class="fa fa-calendar"></i>
+                      <span>
+                        {{lafecha}}
+                      </span>
+                    </time>
+                  </div>
+                  <div class="even-info">
+                    <h4>
+                      Especialidad: {{ticket.horario.especialista.especialidad.Name}}
+                    </h4>
+                    <h5>
+                      Doctor: {{ticket.horario.especialista.doctor.Name + ' ' + ticket.horario.especialista.doctor.LastName}}
+                    </h5>
+                    <h6>
+                      Dia:  {{ticket.horario.Day + ' -- ' + ticket.horario.hora.Turn}}  ...  Cupo: {{ticket.horario.Cupo}}  ... Lapzo: {{ticket.horario.hora.Start + ' - ' + ticket.horario.hora.End}}
+                    </h6>
+                  </div>
+                  <br>
+                  <button type="button"
+                    *ngIf="sinsignos"
+                    data-toggle="modal"
+                    data-target="#ModalSigVital"
+                    class="btn btn-primary btn-pill">
+                    Signos Vitales
+                  </button>
+                  <br>
+                  <button type="button"
+                    *ngIf="porpagar"
+                    data-toggle="modal"
+                    data-target="#ModalBuyTicket"
+                    class="btn btn-primary btn-pill">
+                    Pagar
+                  </button>
+                  <br>
+                  <button type="button"
+                    *ngIf="noregistrarsignos"
+                    class="btn btn-primary btn-pill"
+                    (click)="completado()">
+                    Sin Registrar signos
+                  </button>
+                </section>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="ModalSigVital" tabindex="-1" role="dialog" aria-labelledby="ModalSigVitalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalSigVitalLabel">
+          Signos Vitales
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="p-4">
+          <div class="form-group">
+            <div class="row">
+              <label for="BloodPressure" class="col-12 col-form-label">
+                Referencia:
+              </label>
+              <input
+                name="reservita.Referred"
+                [(ngModel)]="reservita.Referred"
+                minlength="1"
+                autofocus tabindex="1"
+                placeholder="........."
+                type="text"
+                class="form-control col-12 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="BloodPressure" class="col-12 col-form-label">
+                Acompaniante:
+              </label>
+              <input
+                name="reservita.Companion"
+                [(ngModel)]="reservita.Companion"
+                minlength="1"
+                tabindex="2"
+                placeholder="........."
+                type="text"
+                class="form-control col-12 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="BloodPressure" class="col-md-6 col-form-label">
+                Parentesco:
+              </label>
+              <input
+                name="reservita.Relationship"
+                [(ngModel)]="reservita.Relationship"
+                minlength="1"
+                tabindex="3"
+                placeholder="........."
+                type="text"
+                class="form-control col-md-6 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="BloodPressure" class="col-md-6 col-form-label">
+                Precion arterial:
+              </label>
+              <input
+                name="reservita.BloodPressure"
+                [(ngModel)]="reservita.BloodPressure"
+                minlength="1"
+                tabindex="4"
+                placeholder="........."
+                type="text"
+                class="form-control col-md-4 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="HeartRate" class="col-md-6 col-form-label">
+                Frecuencia de Cardiaca:
+              </label>
+              <input name="reservita.HeartRate"
+                [(ngModel)]="reservita.HeartRate"
+                minlength="1" tabindex="5"
+                placeholder="........."
+                type="text" class="form-control col-md-4 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="BreathingFrequency" class="col-md-6 col-form-label">
+                Frecuencia de respiración:
+              </label>
+              <input name="reservita.BreathingFrequency"
+                [(ngModel)]="reservita.BreathingFrequency"
+                minlength="1" tabindex="6"
+                placeholder="........."
+                type="text" class="form-control col-md-4 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="Temperature" class="col-md-6 col-form-label">
+                Temperatura(C°):
+              </label>
+              <input name="reservita.Temperature"
+                [(ngModel)]="reservita.Temperature"
+                minlength="1" tabindex="7"
+                placeholder="........."
+                type="text" class="form-control col-md-4 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="Saturation" class="col-md-6 col-form-label">
+                Oxigenación(SpO2%):
+              </label>
+              <input name="reservita.Saturation"
+                [(ngModel)]="reservita.Saturation"
+                minlength="1" tabindex="8"
+                placeholder="........."
+                type="text" class="form-control col-md-4 text-center">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="completado()">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="ModalBuyTicket" tabindex="-1" role="dialog" aria-labelledby="ModalBuyTicketLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalBuyTicketLabel">
+          Cita con pago o gratuita
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="p-4">
+          <div class="form-group">
+            <div class="row">
+              <label for="BloodPressure" class="col-12 col-form-label">
+                Monto Pagado:
+              </label>
+              <input
+                name="reserva.Amount"
+                [(ngModel)]="reserva.Amount"
+                required minlength="2"
+                onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                autofocus tabindex="1"
+                placeholder="........."
+                type="text"
+                class="form-control col-12 text-center">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="BloodPressure" class="col-12 col-form-label">
+                Monto Total:
+              </label>
+              <input
+                name="reserva.Pay"
+                [(ngModel)]="reserva.Pay"
+                required minlength="2"
+                onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                tabindex="2"
+                placeholder="........."
+                type="text"
+                class="form-control col-12 text-center">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" tabindex="10" class="btn btn-secondary" data-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="button" tabindex="9" class="btn btn-primary" data-dismiss="modal" (click)="completado()">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

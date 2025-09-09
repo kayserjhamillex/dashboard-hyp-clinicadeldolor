@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-12">
+    <button (click)="crear()" type="button" class="btn btn-primary">
+      Crear
+    </button>
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">
+          Lista de Doctores
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Nombres y Apellidos
+              </th>
+              <th>
+                Colegiatura
+              </th>
+              <th>
+                Correo
+              </th>
+              <th>
+                Imagen
+              </th>
+              <th>
+                ...
+              </th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of doctors">
+                <td>
+                  {{item.Name+ ' ' +item.LastName}}
+                </td>
+                <td>
+                  {{item.MedicalSchoolNumber}}
+                </td>
+                <td>
+                  {{item.Email}}
+                </td>
+                <td>
+                  <img *ngIf="item.Photo !== 'imagen'"
+                    class="rounded-circle"
+                    [src]="item.Photo"
+                    alt="foto">
+                  <img *ngIf="item.Photo === 'imagen'"
+                    class="rounded-circle"
+                    src="../../../../assets/img/faces/avatar.jpg"
+                    alt="foto">
+                </td>
+                <td class="text-primary">
+                  <button (click)="editar(item.id)" type="button" class="btn btn-info">
+                    <span class="material-icons">
+                      edit
+                      </span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

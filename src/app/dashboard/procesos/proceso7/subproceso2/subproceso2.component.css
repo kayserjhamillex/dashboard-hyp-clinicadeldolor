@@ -1,0 +1,16 @@
+img {
+  width: 100px;
+  height: 100px;
+}
+.cuadro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.foto {
+  width: 150px;
+  height: 150px;
+}
+.foto:hover {
+  transform: scale(1.5);
+}

@@ -1,0 +1,279 @@
+<div class="row">
+  <div *ngIf="lista" class="col-12">
+    <div class="row">
+      <div class="col-12 col-lg-4">
+        <button (click)="crear()" type="button" class="btn btn-primary">
+          Crear
+        </button>
+      </div>
+      <div *ngIf="listafiltrada" class="col-12 col-lg-4">
+        <button (click)="verdesabilitados()" type="button" class="btn btn-primary">
+          Lista Desabilitada
+        </button>
+      </div>
+      <div *ngIf="!listafiltrada" class="col-12 col-lg-4">
+        <button (click)="verdesabilitados()" type="button" class="btn btn-primary">
+          Lista Normal
+        </button>
+      </div>
+      <div class="col-12 col-lg-4">
+        <button (click)="buscar()" type="button" class="btn btn-primary">
+          Buscar
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 *ngIf="lista" class="card-title">
+          Lista de Pacientes
+        </h4>
+        <h4 *ngIf="busqueda" class="card-title">
+          Busqueda Paciente
+        </h4>
+        <h4 *ngIf="resultado" class="card-title">
+          Paciente Encontrado
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div *ngIf="busqueda" class="col-12 p-1">
+            <form>
+              <div class="row">
+                <div class="col-12 col-lg-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Numero Documento
+                    </label>
+                    <input name="dato"
+                    [(ngModel)]="dato"
+                    type="text" class="form-control"
+                    placeholder="32536243">
+                  </div>
+                </div>
+                <div class="col-12 col-lg-3">
+                  <button (click)="searchDocCliente()" type="button" class="btn btn-primary btn-block"
+                  [disabled]="(dato === '')? true:false">
+                    Por Documento
+                  </button>
+                </div>
+                <div class="col-12 col-lg-3">
+                  <button (click)="ver()" type="button" class="btn btn-primary btn-block">
+                    Ver Lista
+                  </button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-lg-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Apellidos
+                    </label>
+                    <input name="dataapellido"
+                    [(ngModel)]="dataapellido"
+                    type="text" class="form-control"
+                    placeholder="dataapellido">
+                  </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Nombres
+                    </label>
+                    <input name="datanombre"
+                    [(ngModel)]="datanombre"
+                    type="text" class="form-control"
+                    placeholder="datanombre">
+                  </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                  <button (click)="searchdata(dataapellido, datanombre)"
+                  type="button" class="btn btn-primary btn-block">
+                    Por Datos
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div *ngIf="resultado" class="col-12 p-1">
+            <div class="card mb-3 carta">
+              <div class="row g-0">
+                <div class="col-md-4 text-center cuadro">
+                  <img *ngIf="cliente.Photo !== ''"
+                    [src]="cliente.Photo"
+                    class="img-fluid rounded-start foto" alt="...">
+                  <img *ngIf="cliente.Photo === 'imagen' || cliente.Photo === ''"
+                    src="../../../../assets/img/faces/clem-onojeghuo-2.jpg"
+                    class="img-fluid rounded-start foto" alt="...">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h2 class="card-title">
+                      {{cliente.Name + ' ' + cliente.LastName}}
+                    </h2>
+                    <h3>
+                      {{cliente.DocumentNumber}}
+                    </h3>
+                    <!-- <h5>
+                      {{cliente.Email}}
+                    </h5> -->
+                    <h6>
+                      {{cliente.Phone}}
+                    </h6>
+                    <br>
+                    <button (click)="editarsearch()" type="button" class="btn btn-primary">
+                      Editar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="lista && listafiltrada" class="col-12 p-1">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>
+                    Nombres y Apellidos
+                  </th>
+                  <!-- <th>
+                    Correo
+                  </th> -->
+                  <th>
+                    Num. Documento
+                  </th>
+                  <th>
+                    Celular
+                  </th>
+                  <!-- <th>
+                    Imagen
+                  </th> -->
+                  <th>
+                    ...
+                  </th>
+                  <th>
+                    ...
+                  </th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of clienteshabilitados">
+                    <td>
+                      {{item.Name + ' ' + item.LastName}}
+                    </td>
+                    <!-- <td>
+                      {{item.Email}}
+                    </td> -->
+                    <td>
+                      {{item.DocumentNumber}}
+                    </td>
+                    <td>
+                      {{item.Phone}}
+                    </td>
+                    <!-- <td>
+                      <img *ngIf="item.Photo !== 'imagen' || item.Photo !== ''"
+                        class="rounded-circle"
+                        [src]="item.Photo"
+                        alt="foto">
+                      <img *ngIf="item.Photo === 'imagen' || item.Photo === ''"
+                        class="rounded-circle"
+                        src="../../../../assets/img/faces/avatar.jpg"
+                        alt="foto">
+                    </td> -->
+                    <td class="text-primary">
+                      <button (click)="editar(item.id)"
+                        type="button" class="btn btn-info">
+                        <span class="material-icons">
+                          edit
+                        </span>
+                      </button>
+                    </td>
+                    <td class="text-primary">
+                      <button (click)="deshabilitar(item.id)"
+                        type="button" class="btn btn-warning">
+                        <span class="material-icons">
+                          lock
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div *ngIf="lista && !listafiltrada" class="col-12 p-1">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-warning">
+                  <th>
+                    Nombres y Apellidos
+                  </th>
+                  <!-- <th>
+                    Correo
+                  </th> -->
+                  <th>
+                    Num. Documento
+                  </th>
+                  <th>
+                    Celular
+                  </th>
+                  <!-- <th>
+                    Imagen
+                  </th> -->
+                  <th>
+                    ...
+                  </th>
+                  <th>
+                    ...
+                  </th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of clientesdesabilitados">
+                    <td>
+                      {{item.Name + ' ' + item.LastName}}
+                    </td>
+                    <!-- <td>
+                      {{item.Email}}
+                    </td> -->
+                    <td>
+                      {{item.DocumentNumber}}
+                    </td>
+                    <td>
+                      {{item.Phone}}
+                    </td>
+                    <!-- <td>
+                      <img *ngIf="item.Photo !== 'imagen' || item.Photo !== ''"
+                        class="rounded-circle"
+                        [src]="item.Photo"
+                        alt="foto">
+                      <img *ngIf="item.Photo === 'imagen' || item.Photo === ''"
+                        class="rounded-circle"
+                        src="../../../../assets/img/faces/avatar.jpg"
+                        alt="foto">
+                    </td> -->
+                    <td class="text-primary">
+                      <button (click)="editar(item.id)"
+                        type="button" class="btn btn-info">
+                        <span class="material-icons">
+                          edit
+                        </span>
+                      </button>
+                    </td>
+                    <td class="text-primary">
+                      <button (click)="habilitar(item.id)"
+                        type="button" class="btn btn-warning">
+                        <span class="material-icons">
+                          lock_open
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

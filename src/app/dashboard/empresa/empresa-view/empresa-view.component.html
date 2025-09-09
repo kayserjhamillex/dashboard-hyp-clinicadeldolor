@@ -1,0 +1,129 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <div class="row">
+          <div class="col-12 col-lg-6 p-1">
+            <h4 class="card-title">
+              Datos Empresa
+            </h4>
+          </div>
+          <div class="col-12 col-lg-6 p-1">
+            <button (click)="editar()" type="button" class="btn btn-primary">
+              Modificar
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 col-lg-6">
+            <div class="row">
+              <div class="col-12 p-1">
+                <h3>
+                  Nombre:
+                </h3>
+                <h2>
+                  {{empresa.Name}}
+                </h2>
+              </div>
+              <div class="col-12 p-1">
+                <h3>
+                  Razon Social:
+                </h3>
+                <h2>
+                  {{empresa.BusinessName}}
+                </h2>
+              </div>
+              <div class="col-12 p-1">
+                <h3>
+                  Direccion:
+                </h3>
+                <h2>
+                  {{empresa.Address}}
+                </h2>
+              </div>
+              <div class="col-12 p-1">
+                <h3>
+                  Correo:
+                </h3>
+                <h2>
+                  {{empresa.Email}}
+                </h2>
+              </div>
+              <div class="col-12 p-1">
+                <h3>
+                  Celular:
+                </h3>
+                <h2>
+                  {{empresa.Phone}}
+                </h2>
+              </div>
+              <div class="col-12 p-1">
+                <h3>
+                  Celular 2:
+                </h3>
+                <h2>
+                  {{empresa.Phone2}}
+                </h2>
+              </div>
+              <div class="col-12 p-1">
+                <h3>
+                  Mision:
+                </h3>
+                <h2>
+                  {{empresa.Mision}}
+                </h2>
+              </div>
+              <div class="col-12 p-1">
+                <h3>
+                  Vision:
+                </h3>
+                <h2>
+                  {{empresa.Vision}}
+                </h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <div class="row">
+              <div class="col-12 p-1">
+                <h3>
+                  Historia:
+                </h3>
+                <h2>
+                  {{empresa.History}}
+                </h2>
+              </div>
+              <div class="col-12 p-1">
+                <h3>
+                  Mision:
+                </h3>
+                <h2>
+                  {{empresa.Mision}}
+                </h2>
+              </div>
+              <div class="col-12 p-1">
+                <h3>
+                  Vision:
+                </h3>
+                <h2>
+                  {{empresa.Vision}}
+                </h2>
+              </div>
+              <div class="col-12 p-1">
+                <h3>
+                  Logo:
+                </h3>
+                <img class="w-50" *ngIf="empresa.Logo !== 'imagen'"
+                  [src]="empresa.Logo" alt="Logo">
+                <img class="w-50" *ngIf="empresa.Logo === 'imagen'"
+                  src="../../../../assets/img/logo-small.png" alt="Logo">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

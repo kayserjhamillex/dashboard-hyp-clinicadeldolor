@@ -1,0 +1,264 @@
+<div class="row">
+  <div class="col-12">
+    <button (click)="crear()" type="button" class="btn btn-primary">
+      Crear
+    </button>
+  </div>
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 *ngIf="!bandera" class="card-title">
+          Tipos de Laboratorios
+        </h4>
+        <h4 *ngIf="bandera" class="card-title">
+          Editar Tipo
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div *ngIf="!bandera" class="col-12 p-4">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>
+                    Nombre
+                  </th>
+                  <th>
+                    ...
+                  </th>
+                  <th>
+                    ...
+                  </th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of tipos">
+                    <td>
+                      {{item.Name}}
+                    </td>
+                    <td class="text-primary">
+                      <button (click)="ver(item.id)" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+                        <span class="material-icons">
+                          visibility
+                        </span>
+                      </button>
+                    </td>
+                    <td class="text-primary">
+                      <button (click)="edit(item.id)" type="button" class="btn btn-warning">
+                        <span class="material-icons">
+                          edit
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+              </table>
+            </div>
+          </div>
+          <div *ngIf="bandera" class="col-12 p-4">
+            <form>
+              <div class="row">
+                <div class="col-12 p-1">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">
+                      Nombre
+                    </label>
+                    <input name="tipo.Name"
+                      [(ngModel)]="tipo.Name"
+                      type="text" class="form-control"
+                      required minlength="3"
+                      autofocus tabindex="1"
+                      placeholder=".........">
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 p-1">
+                  <button (click)="cancelar()" type="submit"
+                    class="btn btn-primary pull-left">
+                    Cancelar
+                  </button>
+                </div>
+                <div class="col-12 col-md-6 p-1">
+                  <button (click)="updateTipo()" type="submit"
+                    class="btn btn-primary pull-right"
+                    [disabled]="(tipo.Name === '')? true:false">
+                    Actualizar
+                  </button>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Examenes de Laboratorio
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-lg-4 p-1">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class=" text-primary">
+                    <th>
+                      Titulo
+                    </th>
+                    <th>
+                      Precio
+                    </th>
+                    <th>
+                      ...
+                    </th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of laboratorios">
+                      <td>
+                        {{item.Name}}
+                      </td>
+                      <td>
+                        {{item.Price}}
+                      </td>
+                      <td class="text-primary">
+                        <button (click)="editar(item.id)" type="button" class="btn btn-info" data-dismiss="modal">
+                          <span class="material-icons">
+                            edit
+                          </span>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 p-1">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class=" text-primary">
+                    <th>
+                      Nombre
+                    </th>
+                    <th>
+                      Medicion
+                    </th>
+                    <th>
+                      ...
+                    </th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of itemslab">
+                      <td>
+                        {{item.Name}}
+                      </td>
+                      <td>
+                        {{item.Measurement}}
+                      </td>
+                      <td class="text-primary">
+                        <button (click)="editaritem(item.id)" type="button" class="btn btn-info" data-dismiss="modal">
+                          <span class="material-icons">
+                            edit
+                          </span>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 p-1">
+              <form>
+                <div class="row">
+                  <div class="col-12 p-1">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">
+                        Nombre
+                      </label>
+                      <input name="ElItem.Name"
+                        [(ngModel)]="ElItem.Name"
+                        type="text" class="form-control"
+                        required minlength="3"
+                        autofocus tabindex="1"
+                        placeholder=".........">
+                    </div>
+                  </div>
+                  <div class="col-12 p-1">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">
+                        Metodo
+                      </label>
+                      <input name="ElItem.Method"
+                        [(ngModel)]="ElItem.Method"
+                        type="text" class="form-control"
+                        required minlength="3"
+                        autofocus tabindex="1"
+                        placeholder=".........">
+                    </div>
+                  </div>
+                  <div class="col-12 p-1">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">
+                        Unidad de medida
+                      </label>
+                      <input name="ElItem.Measurement"
+                        [(ngModel)]="ElItem.Measurement"
+                        type="text" class="form-control"
+                        required minlength="3"
+                        autofocus tabindex="1"
+                        placeholder=".........">
+                    </div>
+                  </div>
+                  <div class="col-12 p-1">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">
+                        Nombre
+                      </label>
+                      <textarea name="ElItem.ReferentialRange"
+                      [(ngModel)]="ElItem.ReferentialRange"
+                      class="form-control"
+                      required minlength="3"
+                      autofocus tabindex="1"
+                      placeholder="........."
+                      id="" cols="30" rows="10"></textarea>
+                    </div>
+                  </div>
+                  <div class="col-12 p-1">
+                    <button (click)="saveItem()" type="submit"
+                      class="btn btn-primary pull-right"
+                      [disabled]="(tipo.Name === '')? true:false">
+                      Crear
+                    </button>
+                  </div>
+                  <div class="col-12 p-1">
+                    <button (click)="updateItem(codigoitem)" type="submit"
+                      class="btn btn-primary pull-right"
+                      [disabled]="(tipo.Name === '')? true:false">
+                      Actualizar
+                    </button>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="agregar(codigotipo)">
+          Agregar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
