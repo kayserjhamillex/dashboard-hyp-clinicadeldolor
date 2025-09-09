@@ -4,15 +4,14 @@ import { AdminService } from '../services/admin.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-auth',
-  standalone: true,
-  imports: [
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule
-  ],
-  templateUrl: './auth.component.html',
-  styleUrl: './auth.component.css'
+    selector: 'app-auth',
+    imports: [
+        FormsModule,
+        RouterModule,
+        ReactiveFormsModule
+    ],
+    templateUrl: './auth.component.html',
+    styleUrl: './auth.component.css'
 })
 export default class AuthComponent implements OnInit {
 

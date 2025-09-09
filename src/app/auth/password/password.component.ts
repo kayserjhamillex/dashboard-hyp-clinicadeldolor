@@ -6,15 +6,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-password',
-  standalone: true,
-  imports: [
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule
-  ],
-  templateUrl: './password.component.html',
-  styleUrl: './password.component.css'
+    selector: 'app-password',
+    imports: [
+        FormsModule,
+        RouterModule,
+        ReactiveFormsModule
+    ],
+    templateUrl: './password.component.html',
+    styleUrl: './password.component.css'
 })
 export default class PasswordComponent implements OnInit {
   parametro = {

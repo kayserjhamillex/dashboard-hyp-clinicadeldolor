@@ -6,15 +6,14 @@ import { AdminService } from '../services/admin.service';
 import { navItems } from './_nav';
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule
-  ],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+    selector: 'app-dashboard',
+    imports: [
+        FormsModule,
+        RouterModule,
+        ReactiveFormsModule
+    ],
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.css'
 })
 export default class DashboardComponent implements OnInit {
   public sidebarMinimized = false;
